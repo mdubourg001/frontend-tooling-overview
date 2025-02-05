@@ -30,6 +30,10 @@ export const CATEGORIES = [
     key: "minifier",
   },
   {
+    name: "View\xa0Library",
+    key: "viewLibrary",
+  },
+  {
     name: "Dev\xa0Server",
     key: "devServer",
   },
@@ -133,6 +137,23 @@ export const TOOLS = [
     uses: ["SpiderMonkey"],
   },
   {
+    name: "React",
+    viewLibrary: true,
+    picto: "https://svgl.app/library/react_dark.svg",
+  },
+  {
+    name: "Vue.js",
+    viewLibrary: true,
+    picto: "https://svgl.app/library/vue.svg",
+    related: ["React"],
+  },
+  {
+    name: "Angular",
+    viewLibrary: true,
+    picto: "https://svgl.app/library/angular.svg",
+    related: ["Vue.js"],
+  },
+  {
     name: "Vite",
     devServer: true,
     picto: "https://svgl.app/library/vitejs.svg",
@@ -148,7 +169,13 @@ export const TOOLS = [
     name: "Next.js",
     devServer: true,
     picto: "https://svgl.app/library/nextjs_icon_dark.svg",
-    uses: ["Webpack", "Turbopack"],
+    uses: ["Webpack", "Turbopack", "React"],
+  },
+  {
+    name: "Nuxt",
+    devServer: true,
+    picto: "https://svgl.app/library/nuxt.svg",
+    uses: ["Vite", "Vue.js"],
   },
   {
     name: "TypeScript",
