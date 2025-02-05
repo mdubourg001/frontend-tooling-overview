@@ -1,4 +1,7 @@
 import { useMemo, useState } from "react";
+import { useQueryState } from "nuqs";
+import { NuqsAdapter } from "nuqs/adapters/react";
+import clsx from "clsx";
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -11,11 +14,15 @@ import {
 
 import { Tool } from "./Tool";
 import { CategoryFilters } from "./CategoryFilters";
+import { WhatModalContent } from "./WhatModalContent";
+import { CategoryModalContent } from "./CategoryModalContent";
 import { useLayoutedElements } from "../hooks/useLayoutedElements";
+import { useModal } from "../hooks/useModal";
 import { CATEGORIES, TOOLS } from "../constants";
+import type { CategoryKey } from "../types";
 
 import "@xyflow/react/dist/style.css";
-import clsx from "clsx";
+import { ToolModalContent } from "./ToolModalContent";
 
 const initialNodes: Node[] = TOOLS.map((tool, index) => ({
   id: tool.name,
@@ -64,6 +71,7 @@ const initialEdges: Edge[] = TOOLS.flatMap((tool) => {
   return edges;
 });
 
+// TODO: memoize components
 function LayoutFlow() {
   const [filters, setFilters] = useState(
     CATEGORIES.map((cat) => ({ key: cat.key, label: cat.name, checked: true }))
@@ -71,11 +79,55 @@ function LayoutFlow() {
   const [emphasizedCategory, setEmphasizedCategory] = useState<string | null>(
     null
   );
+  const [focusedCategory, setFocusedCategory] = useQueryState("category");
+  const [focusedTool, setFocusedTool] = useQueryState("tool");
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
   const [initialized, { toggle, isRunning }, dragEvents] =
     useLayoutedElements();
+
+  const { toggle: toggleWhatModal, render: renderWhatModal } = useModal({
+    title: "Frontend Tooling Overview",
+    cancelLabel: "Close",
+    confirmLabel: "",
+    children: () => <WhatModalContent />,
+  });
+
+  const focusedCategoryObject = CATEGORIES.find(
+    (cat) => cat.key === focusedCategory
+  );
+  const focusedCategoryTools = TOOLS.filter((tool) => tool[focusedCategory]);
+  const { toggle: toggleFocusCategoryModal, render: renderFocusCategoryModal } =
+    useModal({
+      title: focusedCategoryObject?.name,
+      cancelLabel: "Close",
+      confirmLabel: "",
+      initialIsOpen: !!focusedCategory,
+      children: () => (
+        <CategoryModalContent
+          category={focusedCategoryObject}
+          tools={focusedCategoryTools}
+          handleToolClick={(toolName: string) => {
+            toggleFocusCategoryModal();
+            setFocusedTool(toolName);
+            toggleFocusToolModal();
+          }}
+        />
+      ),
+      onCancel: () => setFocusedCategory(null),
+    });
+
+  const focusedToolObject = TOOLS.find((tool) => tool.name === focusedTool);
+  const { toggle: toggleFocusToolModal, render: renderFocusToolModal } =
+    useModal({
+      title: focusedToolObject?.name,
+      cancelLabel: "Close",
+      confirmLabel: "",
+      initialIsOpen: !!focusedToolObject,
+      children: () => <ToolModalContent tool={focusedToolObject} tools={[]} />,
+      onCancel: () => setFocusedTool(null),
+    });
 
   const filteredNodes = useMemo(
     () =>
@@ -123,9 +175,16 @@ function LayoutFlow() {
           </button>
         )} */}
 
+        {renderWhatModal()}
+        {renderFocusCategoryModal()}
+        {renderFocusToolModal()}
+
         <aside className="fixed left-10 top-10">
           <CategoryFilters
             filters={filters}
+            isSimulationRunning={isRunning?.()}
+            handleWhatClick={toggleWhatModal}
+            handleToggleSimulationRunning={toggle}
             handleFilterChange={(key) => {
               setFilters((filters) =>
                 filters.map((f) =>
@@ -143,7 +202,15 @@ function LayoutFlow() {
                 filters.map((f) => ({ ...f, checked: false }))
               );
             }}
-            handleCategoryMouseEnter={(key) => setEmphasizedCategory(key)}
+            handleFocusCategoryClick={(key: CategoryKey) => {
+              setFocusedCategory(key);
+              toggleFocusCategoryModal();
+            }}
+            handleCategoryMouseEnter={(key) => {
+              if (filters.some((f) => f.key === key && f.checked)) {
+                setEmphasizedCategory(key);
+              }
+            }}
             handleCategoryMouseLeave={() => setEmphasizedCategory(null)}
           />
         </aside>
@@ -155,7 +222,9 @@ function LayoutFlow() {
 export function ToolingGraph() {
   return (
     <ReactFlowProvider>
-      <LayoutFlow />
+      <NuqsAdapter>
+        <LayoutFlow />
+      </NuqsAdapter>
     </ReactFlowProvider>
   );
 }

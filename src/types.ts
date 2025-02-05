@@ -1,4 +1,4 @@
-import type { CATEGORIES, TOOLS } from "./constants";
+import type { CATEGORIES } from "./constants";
 
 export type CategoryKey = (typeof CATEGORIES)[number]["key"];
 

@@ -8,8 +8,6 @@ type Props = Node & {
   data: ToolType;
 };
 
-// TODO: emphasize tools of a category when hovering over a category
-
 function Tool({ className, data }: Props) {
   return (
     <div

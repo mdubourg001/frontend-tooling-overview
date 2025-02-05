@@ -8,26 +8,85 @@ export const CATEGORIES = [
   {
     name: "JS\xa0Engine",
     key: "jsEngine",
+    description: (
+      <>
+        <span>
+          Low-level software responsible of the compilation and execution of
+          JavaScript (and WebAssembly) code.
+        </span>
+        <br />
+        <br />
+        <span>
+          Their main use is through web browsers and JavaScript runtimes relying
+          on them to execute JavaScript code.
+        </span>
+      </>
+    ),
   },
   {
     name: "JS\xa0Runtime",
     key: "jsRuntime",
+    description:
+      "JavaScript execution environment providing APIs for I/O operations (networking, file-system access, multithreading, RTC) based on a event-driven, asynchronous architecture.",
   },
   {
     name: "Compiler\xa0/\xa0Transpiler",
     key: "compilerTranspiler",
+    description: (
+      <>
+        <span>
+          Tool transforming code from one language to another, or from a
+          superset to a subset of a language (e.g. TS {"->"} JS, JSX {"->"} JS,
+          ESNext {"->"} ES5, Sass {"->"} CSS...).
+        </span>
+        <br />
+        <br />
+        <span>
+          Compilers are central parts of most modern frontend tools as they
+          allow out-of-the-box usage of features like static typing (e.g.
+          TypeScript) or higher-level syntax (e.g. JSX).
+        </span>
+      </>
+    ),
   },
   {
     name: "Parser",
     key: "parser",
+    description:
+      "Tool taking source code as input and converting it into a structured representation, typically an Abstract Syntax Tree (AST), for further processing like compilation or interpretation.",
   },
   {
     name: "Bundler",
     key: "bundler",
+    description: (
+      <>
+        <span>
+          Tool taking multiple entry files (code or other static assets),
+          resolving their dependencies, and combining them into optimized output
+          files for efficient execution in a browser or runtime environment.
+        </span>
+        <br />
+        <br />
+        <span>
+          Modern "meta-frameworks" and build tools (e.g. Vite, Next.js,
+          Astro...) use bundlers internally to allow out-of-the-box optimization
+          and usage of a lot of different assets (e.g. TypeScript files, CSS
+          modules, images, JSON files...).
+        </span>
+        <br />
+        <br />
+        <span>
+          Bundlers are also extensively used for the compilation and packaging
+          of libraries.
+        </span>
+      </>
+    ),
   },
   {
     name: "Minifier",
     key: "minifier",
+    description:
+      "Tool optimizing code by shrinking variable names, removing useless whitespaces / line-breaks / comments and dropping unused code.",
   },
   {
     name: "View\xa0Library",
@@ -44,18 +103,49 @@ export const CATEGORIES = [
   {
     name: "Linter",
     key: "linter",
+    description:
+      "Tool statically analyzing code to find problematic patterns or code that doesn't adhere to configured style guidelines.",
   },
   {
     name: "Formatter",
     key: "formatter",
+    description:
+      "Tool automatically formatting code according to a set of rules, typically to enforce a consistent style across a codebase.",
   },
   {
     name: "Test\xa0Runner",
     key: "testRunner",
+    description:
+      "Tool executing tests and reporting results, typically providing features like test isolation, parallelization, and code coverage.",
   },
   {
     name: "Package\xa0Manager",
     key: "packageManager",
+    description: (
+      <>
+        <span>
+          Tool allowing the management (installation, uninstallation, update) of
+          dependencies in JavaScript projects. They provide features like
+          versioning, dependency resolution, and version locking through
+          lockfiles.
+        </span>
+        <br />
+        <br />
+        <span>
+          Package managers rely on registries to fetch packages and their
+          metadata: the most known and used registry is the{" "}
+          <a
+            className="underline"
+            href="https://www.npmjs.com/"
+            target="blank"
+            rel="noopener noreferrer"
+          >
+            npm registry
+          </a>
+          .
+        </span>
+      </>
+    ),
   },
   {
     name: "CSS\xa0Preprocessor",
