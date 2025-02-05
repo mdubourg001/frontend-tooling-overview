@@ -30,10 +30,13 @@ const initialEdges: Edge[] = TOOLS.flatMap((tool) => {
 
   if ("uses" in tool) {
     edges = tool.uses.map((use) => ({
-      className: "[&>path]:!stroke-2",
       id: `${tool.name}-${use}`,
       source: tool.name,
       target: use,
+      style: {
+        strokeWidth: 2,
+        stroke: "black",
+      },
       // markerEnd: {
       //   type: MarkerType.ArrowClosed,
       //   color: "#fff",
@@ -47,11 +50,13 @@ const initialEdges: Edge[] = TOOLS.flatMap((tool) => {
     edges = [
       ...edges,
       ...tool.related.map((related) => ({
-        className: "[&>path]:opacity-50",
         id: `${tool.name}-${related}`,
         source: tool.name,
         target: related,
         animated: true,
+        style: {
+          stroke: "gray",
+        },
       })),
     ];
   }
@@ -99,13 +104,12 @@ function LayoutFlow() {
     [edges, filteredNodes]
   );
 
-  // TODO: somehow make tools that are very used be bigger ?
-
   return (
     <ReactFlow
       nodeTypes={{ custom: Tool }}
       nodes={filteredNodes}
       edges={filteredEdges}
+      minZoom={0.45}
       onNodeDragStart={dragEvents.start}
       onNodeDrag={dragEvents.drag}
       onNodeDragStop={dragEvents.stop}

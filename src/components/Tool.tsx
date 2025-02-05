@@ -14,7 +14,7 @@ function Tool({ className, data }: Props) {
   return (
     <div
       className={clsx(
-        "px-4 py-2 shadow-md rounded-md bg-white border-2 border-stone-400",
+        "px-4 py-3 shadow-md rounded-md bg-slate-800 text-white border-2 border-yellow-600",
         className
       )}
     >
