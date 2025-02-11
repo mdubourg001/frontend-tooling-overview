@@ -23,6 +23,28 @@ function ToolModalContent({ tool, sameCategoryTools = [] }: Props) {
         </>
       )}
 
+      {"links" in tool && (tool.links?.length ?? 0) > 0 && (
+        <>
+          <h2 className="italic text-2xl border-b w-fit border-orange-300 mb-4">
+            Links
+          </h2>
+          <ul className="list-disc list-inside">
+            {tool.links?.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+
       {sameCategoryTools.length > 0 && (
         <>
           <h2 className="italic text-2xl border-b w-fit border-orange-300 mb-4">

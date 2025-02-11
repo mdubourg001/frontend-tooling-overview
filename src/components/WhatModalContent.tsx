@@ -26,8 +26,9 @@ export function WhatModalContent() {
       </p>
 
       <p className="italic">
-        Disclaimer: This is a simplified representation, and some tools might be
-        purposely missing to keep the visual representation clear.
+        Disclaimer: This is a simplified representation, and some tools and/or
+        links might be purposely missing to keep the visual representation
+        clear.
       </p>
     </div>
   );

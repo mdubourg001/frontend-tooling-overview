@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useReactFlow } from "@xyflow/react";
 import cx from "clsx";
+
 import { CATEGORIES } from "../constants";
 
 type Props = {
@@ -31,6 +33,7 @@ export function CategoryFilters({
   handleCategoryMouseEnter,
   handleCategoryMouseLeave,
 }: Props) {
+  const prezMode = true;
   const { fitView } = useReactFlow();
 
   return (
@@ -38,7 +41,7 @@ export function CategoryFilters({
       <h1 className="text-2xl font-extrabold ">Frontend Tooling Overview</h1>
       <div className="flex items-center gap-x-2 mb-4">
         <button className="underline cursor-pointer" onClick={handleWhatClick}>
-          What?
+          What is it?
         </button>
         <span aria-hidden>•</span>
         <button
@@ -58,53 +61,63 @@ export function CategoryFilters({
         </a>
       </div>
 
-      {filters.map((filter) => {
-        const categoryObject =
-          CATEGORIES.find((cat) => cat.key === filter.key) ?? {};
+      <div className="relative flex flex-col gap-y-2">
+        {/* <textarea
+          className="absolute bottom-0 rotate-180 w-full h-full bg-gradient-to-br from-orange-300 to-rose-300 z-10"
+          name=""
+          id=""
+        ></textarea> */}
 
-        return (
-          <div className="flex items-center gap-x-2" key={filter.key}>
-            <button
-              className={cx(
-                "flex items-center gap-x-2 px-2 py-1 border-2 rounded w-fit text-black cursor-pointer active:scale-95 transition-transform",
-                {
-                  "border-yellow-600 bg-black text-white": filter.checked,
-                  "bg-white border-slate-200": !filter.checked,
-                }
-              )}
-              onMouseEnter={() => handleCategoryMouseEnter(filter.key)}
-              onMouseLeave={handleCategoryMouseLeave}
-            >
-              <input
-                className="cursor-pointer"
-                type="checkbox"
-                id={filter.key}
-                hidden
-                checked={filter.checked}
-                onChange={() => {
-                  handleFilterChange(filter.key);
+        {filters.map((filter) => {
+          const categoryObject =
+            CATEGORIES.find((cat) => cat.key === filter.key) ?? {};
 
-                  fitView({ padding: 200, duration: 500 });
-                }}
-              />
-
-              {filter.checked && <span className="text-sm">✅</span>}
-              <label className="cursor-pointer text-sm" htmlFor={filter.key}>
-                {filter.label}
-              </label>
-            </button>
-
-            {"description" in categoryObject && (
+          return (
+            <div className="flex items-center gap-x-2" key={filter.key}>
               <button
-                className="text-xs underline cursor-pointer opacity-30 hover:opacity-100 transition-opacity"
-                onClick={() => handleFocusCategoryClick(filter.key)}
+                className={cx(
+                  "flex items-center gap-x-2 px-2 py-1 border-2 rounded w-fit text-black cursor-pointer active:scale-95 transition-transform",
+                  {
+                    "border-yellow-600 bg-black text-white": filter.checked,
+                    "bg-white border-slate-200": !filter.checked,
+                  }
+                )}
+                onMouseEnter={() => handleCategoryMouseEnter(filter.key)}
+                onMouseLeave={handleCategoryMouseLeave}
               >
-                about
+                <input
+                  className="cursor-pointer"
+                  type="checkbox"
+                  id={filter.key}
+                  hidden
+                  checked={filter.checked}
+                  onChange={() => {
+                    handleFilterChange(filter.key);
+
+                    fitView({ padding: 200, duration: 500 });
+                  }}
+                />
+
+                {filter.checked && <span className="text-sm">✅</span>}
+                <label className="cursor-pointer text-sm" htmlFor={filter.key}>
+                  {prezMode && !filter.checked
+                    ? "*".repeat(filter.label.length)
+                    : filter.label}
+                </label>
               </button>
-            )}
-          </div>
-        );
-      })}
+
+              {"description" in categoryObject && (
+                <button
+                  className="text-xs underline cursor-pointer opacity-30 hover:opacity-100 transition-opacity"
+                  onClick={() => handleFocusCategoryClick(filter.key)}
+                >
+                  about
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
       <div className="flex gap-x-2 font-bold text-black border-t pt-4 mt-2">
         <button

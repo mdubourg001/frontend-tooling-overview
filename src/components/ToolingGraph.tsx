@@ -16,13 +16,14 @@ import { Tool } from "./Tool";
 import { CategoryFilters } from "./CategoryFilters";
 import { WhatModalContent } from "./WhatModalContent";
 import { CategoryModalContent } from "./CategoryModalContent";
+import { ToolModalContent } from "./ToolModalContent";
+import { ToolPicto } from "./ToolPicto";
 import { useLayoutedElements } from "../hooks/useLayoutedElements";
 import { useModal } from "../hooks/useModal";
 import { CATEGORIES, TOOLS } from "../constants";
-import type { CategoryKey } from "../types";
+import type { Tool as ToolType } from "../types";
 
 import "@xyflow/react/dist/style.css";
-import { ToolModalContent } from "./ToolModalContent";
 
 const initialNodes: Node[] = TOOLS.map((tool, index) => ({
   id: tool.name,
@@ -40,6 +41,7 @@ const initialEdges: Edge[] = TOOLS.flatMap((tool) => {
       id: `${tool.name}-${use}`,
       source: tool.name,
       target: use,
+      animated: true,
       style: {
         strokeWidth: 2,
         stroke: "black",
@@ -60,7 +62,6 @@ const initialEdges: Edge[] = TOOLS.flatMap((tool) => {
         id: `${tool.name}-${related}`,
         source: tool.name,
         target: related,
-        animated: true,
         style: {
           stroke: "gray",
         },
@@ -101,7 +102,7 @@ function LayoutFlow() {
   const { toggle: toggleFocusCategoryModal, render: renderFocusCategoryModal } =
     useModal({
       title: focusedCategoryObject?.name,
-      cancelLabel: "Close",
+      cancelLabel: "",
       confirmLabel: "",
       initialIsOpen: !!focusedCategory,
       children: () => (
@@ -118,11 +119,18 @@ function LayoutFlow() {
       onCancel: () => setFocusedCategory(null),
     });
 
-  const focusedToolObject = TOOLS.find((tool) => tool.name === focusedTool);
+  const focusedToolObject = TOOLS.find(
+    (tool) => tool.name === focusedTool
+  ) as ToolType;
   const { toggle: toggleFocusToolModal, render: renderFocusToolModal } =
     useModal({
-      title: focusedToolObject?.name,
-      cancelLabel: "Close",
+      title: (
+        <div className="flex gap-x-2 items-center">
+          <ToolPicto tool={focusedToolObject} />
+          <span>{focusedToolObject?.name}</span>
+        </div>
+      ),
+      cancelLabel: "",
       confirmLabel: "",
       initialIsOpen: !!focusedToolObject,
       children: () => <ToolModalContent tool={focusedToolObject} tools={[]} />,
@@ -167,6 +175,10 @@ function LayoutFlow() {
       onNodeDragStop={dragEvents.stop}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
+      onNodeClick={(_, node: Node) => {
+        setFocusedTool(node.data.name as string);
+        toggleFocusToolModal();
+      }}
     >
       <Panel>
         {/* {initialized && (
@@ -202,7 +214,7 @@ function LayoutFlow() {
                 filters.map((f) => ({ ...f, checked: false }))
               );
             }}
-            handleFocusCategoryClick={(key: CategoryKey) => {
+            handleFocusCategoryClick={(key: string) => {
               setFocusedCategory(key);
               toggleFocusCategoryModal();
             }}

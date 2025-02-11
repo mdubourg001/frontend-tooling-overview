@@ -3,6 +3,7 @@ import { Handle, Position, type Node } from "@xyflow/react";
 import clsx from "clsx";
 
 import type { Tool as ToolType } from "../types";
+import { ToolPicto } from "./ToolPicto";
 
 type Props = Node & {
   data: ToolType;
@@ -17,19 +18,7 @@ function Tool({ className, data }: Props) {
       )}
     >
       <div className="flex gap-4 items-center">
-        {data.picto && (
-          <>
-            {data.picto.startsWith("http") ? (
-              <img
-                className="border-0 w-8 h-8"
-                src={data.picto}
-                alt={`Logo of ${data.name}`}
-              />
-            ) : (
-              <span className="text-3xl">{data.picto}</span>
-            )}
-          </>
-        )}
+        <ToolPicto tool={data} />
 
         <p className="text-3xl font-bold">{data.name}</p>
       </div>

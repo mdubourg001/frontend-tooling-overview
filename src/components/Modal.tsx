@@ -5,7 +5,7 @@ type Props = {
   className?: string;
   dataTestId?: string;
   children: React.ReactNode;
-  title?: string;
+  title?: React.ReactNode;
   description?: React.ReactNode;
   onRequestClose?: () => void;
 };
@@ -25,7 +25,7 @@ export function Modal({
         <Dialog.Content
           data-testid={dataTestId}
           className={clsx(
-            "fixed z-40 w-10/12 max-w-[606px] py-5 px-6 bg-slate-900 text-white max-h-[85vh] -translate-x-1/2 -translate-y-1/2 rounded-md top-1/2 left-1/2 overflow-y-scroll",
+            "fixed z-40 w-10/12 max-w-[606px] py-5 px-6 border-4 border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 text-white max-h-[85vh] -translate-x-1/2 -translate-y-1/2 rounded-md top-1/2 left-1/2 overflow-y-scroll",
             className
           )}
           onEscapeKeyDown={onRequestClose}
@@ -34,7 +34,7 @@ export function Modal({
           onInteractOutside={onRequestClose}
         >
           {title && (
-            <Dialog.Title className="font-bold leading-7 mb-[17px] text-24">
+            <Dialog.Title className="leading-7 mb-[17px] font-semibold text-2xl bg-gradient-to-br from-orange-300 to-rose-400 px-2 py-1 -skew-x-5 w-fit">
               {title}
             </Dialog.Title>
           )}

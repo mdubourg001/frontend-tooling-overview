@@ -2,6 +2,7 @@ import React from "react";
 
 import { CATEGORIES } from "../constants";
 import type { Tool } from "../types";
+import { ToolPicto } from "./ToolPicto";
 
 type Props = {
   category: (typeof CATEGORIES)[number];
@@ -39,18 +40,10 @@ function CategoryModalContent({
             {tools.map((tool, index) => (
               <>
                 <div key={tool.name} className="flex items-center gap-x-2">
-                  {tool.picto && tool.picto.startsWith("http") && (
-                    <img
-                      src={tool.picto}
-                      alt={`Logo of ${tool.name}`}
-                      className="w-6 h-6 object-contain"
-                    />
-                  )}
-                  {tool.picto && !tool.picto.startsWith("http") && (
-                    <span className="text-xl object-contain">{tool.picto}</span>
-                  )}
+                  <ToolPicto tool={tool} />
+
                   <button
-                    className="cursor-pointer hover:text-yellow-300 hover:underline"
+                    className="cursor-pointer hover:text-orange-300 hover:underline"
                     onClick={() => handleToolClick(tool.name)}
                   >
                     {tool.name}

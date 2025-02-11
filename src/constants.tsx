@@ -4,23 +4,30 @@ export const CATEGORIES = [
   {
     name: "Specification",
     key: "specification",
+    description: (
+      <p>
+        A language specification is a documentation artifact defining a set of
+        rules and constraints that an implementation must follow to be
+        considered compliant.
+      </p>
+    ),
   },
   {
     name: "JS\xa0Engine",
     key: "jsEngine",
     description: (
-      <>
-        <span>
-          Low-level software responsible of the compilation and execution of
-          JavaScript (and WebAssembly) code.
-        </span>
+      <p>
+        Low-level software responsible of the compilation and execution of
+        JavaScript (and WebAssembly) code.
         <br />
         <br />
-        <span>
-          Their main use is through web browsers and JavaScript runtimes relying
-          on them to execute JavaScript code.
-        </span>
-      </>
+        Their main use is through web browsers and JavaScript runtimes relying
+        on them to execute JavaScript code.
+        <br />
+        <br />
+        <u>Note</u>: Languages like JavaScript and WebAssembly "exist" through
+        the implementation of their respective specifications by JS engines.
+      </p>
     ),
   },
   {
@@ -95,10 +102,27 @@ export const CATEGORIES = [
   {
     name: "Dev\xa0Server",
     key: "devServer",
+    description: (
+      <>
+        <span>
+          Local server providing development features like hot reloading, error
+          reporting, and asset transformation facilitating code changes without
+          needing a full production build.
+        </span>
+        <br />
+        <br />
+        <span>
+          Modern "meta-frameworks" and build tools (e.g. Vite, Next.js,
+          Astro...) are, at core, development servers orchestrating bundlers.
+        </span>
+      </>
+    ),
   },
   {
     name: "Type\xa0Checker",
     key: "typeChecker",
+    description:
+      "Tool that statically validates that values conform to expected data-types in order to catch type-errors early.",
   },
   {
     name: "Linter",
@@ -168,6 +192,87 @@ export const TOOLS = [
     name: "ECMAScript",
     specification: true,
     picto: "https://svgl.app/library/javascript.svg",
+    related: ["CSS"],
+    description: (
+      <>
+        <p>
+          ECMAScript is a standard specification for scripting languages. Most
+          well-known implementations of this standard are JavaScript and
+          ActionScript.
+          <br />
+          <br />
+          While JavaScript includes I/O features, networking features, storage
+          features, and much more, ECMAScript is a standard that defines only
+          the core features of the language.
+          <br />
+          <br />
+          The ECMAScript specification is developed by the{" "}
+          <a
+            className="underline"
+            href="https://tc39.es/ecma262/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ECMA International Technical Committee 39
+          </a>
+          .
+        </p>
+      </>
+    ),
+    links: [
+      {
+        label: "ECMAScript language specification",
+        href: "https://tc39.es/ecma262/",
+      },
+    ],
+  },
+  {
+    name: "Wasm",
+    specification: true,
+    picto:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/WebAssembly_Logo.svg/262px-WebAssembly_Logo.svg.png",
+    related: ["ECMAScript"],
+    description: (
+      <>
+        <p>
+          WebAssembly (Wasm) is a standard specification for a binary
+          instruction format running on stack-based virtual machines. It is
+          designed as a portable compilation target for high-level languages
+          like C/C++/Rust, enabling code to run in web browsers at near-native
+          speed.
+          <br />
+          <br />
+          Wasm is developed by the{" "}
+          <a
+            className="underline"
+            href="https://webassembly.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WebAssembly Community Group
+          </a>
+          .
+        </p>
+      </>
+    ),
+    links: [
+      {
+        label: "WebAssembly website",
+        href: "https://webassembly.org/",
+      },
+    ],
+  },
+  {
+    name: "HTML",
+    specification: true,
+    picto: "https://svgl.app/library/html5.svg",
+    related: ["Wasm"],
+  },
+  {
+    name: "CSS",
+    specification: true,
+    picto: "https://svgl.app/library/css.svg",
+    related: ["HTML"],
   },
   {
     name: "v8",
@@ -197,6 +302,7 @@ export const TOOLS = [
   {
     name: "Deno",
     jsRuntime: true,
+    compilerTranspiler: true,
     devServer: true,
     typeChecker: true,
     linter: true,
@@ -227,6 +333,24 @@ export const TOOLS = [
     uses: ["SpiderMonkey"],
   },
   {
+    name: "Chrome",
+    jsRuntime: true,
+    picto: "https://svgl.app/library/chrome.svg",
+    uses: ["v8"],
+  },
+  {
+    name: "Firefox",
+    jsRuntime: true,
+    picto: "https://svgl.app/library/firefox.svg",
+    uses: ["SpiderMonkey"],
+  },
+  {
+    name: "Safari",
+    jsRuntime: true,
+    picto: "https://svgl.app/library/safari.svg",
+    uses: ["JavaScriptCore"],
+  },
+  {
     name: "React",
     viewLibrary: true,
     picto: "https://svgl.app/library/react_dark.svg",
@@ -247,7 +371,7 @@ export const TOOLS = [
     name: "Vite",
     devServer: true,
     picto: "https://svgl.app/library/vitejs.svg",
-    uses: ["esbuild", "Rollup"],
+    uses: ["esbuild", "Rollup", "Rolldown"],
   },
   {
     name: "Astro",
@@ -269,6 +393,7 @@ export const TOOLS = [
   },
   {
     name: "TypeScript",
+    specification: true,
     typeChecker: true,
     compilerTranspiler: true,
     parser: true,
@@ -338,6 +463,12 @@ export const TOOLS = [
     uses: ["Acorn"],
   },
   {
+    name: "Rolldown",
+    bundler: true,
+    picto: "https://svgl.app/library/rolldown.svg",
+    uses: ["Oxc"],
+  },
+  {
     name: "Webpack",
     devServer: true,
     bundler: true,
@@ -348,7 +479,6 @@ export const TOOLS = [
   {
     name: "Rspack",
     bundler: true,
-    minifier: true,
     picto: "https://assets.rspack.dev/rspack/rspack-logo.svg",
     uses: ["SWC"],
   },

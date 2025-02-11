@@ -15,7 +15,7 @@ export function useModal<T = undefined>({
   onConfirm,
 }: {
   modalClassName?: string;
-  title?: string;
+  title?: React.ReactNode;
   description?: (metadata: T) => React.ReactNode;
   children?: (metadata: T) => React.ReactNode;
   cancelLabel?: string;
@@ -86,7 +86,7 @@ export function useModal<T = undefined>({
           <div className="flex justify-end mt-16 gap-x-8">
             {cancelLabel && (
               <button
-                className="cursor-pointer hover:text-orange-300 transition-colors"
+                className="cursor-pointer hover:text-orange-300 underline transition-colors"
                 onClick={handleClickCancel}
               >
                 {cancelLabel}
