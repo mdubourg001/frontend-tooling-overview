@@ -29,8 +29,7 @@ const initialNodes: Node[] = TOOLS.map((tool, index) => ({
   id: tool.name,
   type: "custom",
   data: tool,
-  position: { x: 0, y: index * 100 },
-  // position: { x: (index % 10) * 100, y: (index % 10) * 100 },
+  position: { x: tool.pos.x ?? 0, y: tool.pos.y ?? index * 100 },
 }));
 
 const initialEdges: Edge[] = TOOLS.flatMap((tool) => {
@@ -43,7 +42,7 @@ const initialEdges: Edge[] = TOOLS.flatMap((tool) => {
       target: use,
       animated: true,
       style: {
-        strokeWidth: 2,
+        strokeWidth: 4,
         stroke: "black",
       },
       // markerEnd: {
@@ -170,6 +169,7 @@ function LayoutFlow() {
       nodes={filteredNodes}
       edges={filteredEdges}
       minZoom={0.45}
+      defaultViewport={{ x: 821, y: 471, zoom: 2 }}
       onNodeDragStart={dragEvents.start}
       onNodeDrag={dragEvents.drag}
       onNodeDragStop={dragEvents.stop}
@@ -181,15 +181,19 @@ function LayoutFlow() {
       }}
     >
       <Panel>
-        {/* {initialized && (
-          <button className="text-white" onClick={toggle}>
-            {isRunning() ? "Stop" : "Start"}
-          </button>
-        )} */}
-
         {renderWhatModal()}
         {renderFocusCategoryModal()}
         {renderFocusToolModal()}
+
+        {/* <button
+          onClick={() => {
+            console.log(
+              nodes.map((n) => ({ name: n.data.name, pos: n.position }))
+            );
+          }}
+        >
+          pos
+        </button> */}
 
         <aside className="fixed left-10 top-10">
           <CategoryFilters

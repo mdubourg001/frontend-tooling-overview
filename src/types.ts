@@ -9,4 +9,5 @@ export type Tool = Partial<Record<CategoryKey, boolean>> & {
   uses?: string[];
   related?: string[];
   links?: { label: string; href: string }[];
+  pos?: { x: number; y: number };
 };

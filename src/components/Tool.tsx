@@ -24,7 +24,7 @@ function Tool({ className, data }: Props) {
       </div>
 
       <Handle type="target" position={Position.Top} />
-      <Handle type="source" position={Position.Bottom} />
+      <Handle type="source" position={Position.Top} />
     </div>
   );
 }
