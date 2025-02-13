@@ -82,7 +82,7 @@ function LayoutFlow() {
   const [focusedCategory, setFocusedCategory] = useQueryState("category");
   const [focusedTool, setFocusedTool] = useQueryState("tool");
 
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
   const [initialized, { toggle, isRunning }, dragEvents] =
     useLayoutedElements();
@@ -163,6 +163,51 @@ function LayoutFlow() {
     [edges, filteredNodes]
   );
 
+  // ----- handlers -----
+
+  const handleResetClick = () => {
+    if (initialized && isRunning?.()) {
+      toggle();
+    }
+
+    setNodes((nodes) =>
+      nodes.map((node) => {
+        const tool = TOOLS.find((tool) => tool.name === node.id);
+
+        if (tool) {
+          return {
+            ...node,
+            position: { x: tool.pos.x ?? 0, y: tool.pos.y ?? 0 },
+          };
+        }
+
+        return node;
+      })
+    );
+
+    setTimeout(toggle);
+  };
+
+  const handleShuffleClick = () => {
+    if (initialized && isRunning?.()) {
+      toggle();
+    }
+
+    setNodes((nodes) =>
+      nodes.map((node) => ({
+        ...node,
+        position: {
+          x: Math.random() * 1800 - 900,
+          y: Math.random() * 1800 - 900,
+        },
+      }))
+    );
+
+    setTimeout(toggle);
+  };
+
+  // ----- rendering -----
+
   return (
     <ReactFlow
       nodeTypes={{ custom: Tool }}
@@ -198,9 +243,11 @@ function LayoutFlow() {
         <aside className="fixed left-6 right-6 top-6 p-4 md:left-10 md:right-auto md:top-10 md:p-0 bg-gradient-to-br md:bg-none from-orange-300 to-rose-300 z-10 border md:border-0 text-center md:text-left">
           <CategoryFilters
             filters={filters}
-            isSimulationRunning={isRunning?.()}
+            isSimulationRunning={initialized && isRunning?.()}
             handleWhatClick={toggleWhatModal}
             handleToggleSimulationRunning={toggle}
+            handleResetClick={handleResetClick}
+            handleShuffleClick={handleShuffleClick}
             handleFilterChange={(key) => {
               setFilters((filters) =>
                 filters.map((f) =>

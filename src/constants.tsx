@@ -37,6 +37,16 @@ export const CATEGORIES = [
       "JavaScript execution environment providing APIs for I/O operations (networking, file-system access, multithreading, RTC) based on a event-driven, asynchronous architecture.",
   },
   {
+    name: "Type\xa0Checker",
+    key: "typeChecker",
+    description:
+      "Tool that statically validates that values conform to expected data-types in order to catch type-errors early.",
+  },
+  {
+    name: "View\xa0Library",
+    key: "viewLibrary",
+  },
+  {
     name: "Compiler\xa0/\xa0Transpiler",
     key: "compilerTranspiler",
     description: (
@@ -95,10 +105,7 @@ export const CATEGORIES = [
     description:
       "Tool optimizing code by shrinking variable names, removing useless whitespaces / line-breaks / comments and dropping unused code.",
   },
-  {
-    name: "View\xa0Library",
-    key: "viewLibrary",
-  },
+
   {
     name: "Dev\xa0Server",
     key: "devServer",
@@ -118,12 +125,7 @@ export const CATEGORIES = [
       </>
     ),
   },
-  {
-    name: "Type\xa0Checker",
-    key: "typeChecker",
-    description:
-      "Tool that statically validates that values conform to expected data-types in order to catch type-errors early.",
-  },
+
   {
     name: "Linter",
     key: "linter",
@@ -171,14 +173,14 @@ export const CATEGORIES = [
       </>
     ),
   },
-  {
-    name: "CSS\xa0Preprocessor",
-    key: "cssPreprocessor",
-  },
-  {
-    name: "CSS\xa0Postprocessor",
-    key: "cssPostprocessor",
-  },
+  // {
+  //   name: "CSS\xa0Preprocessor",
+  //   key: "cssPreprocessor",
+  // },
+  // {
+  //   name: "CSS\xa0Postprocessor",
+  //   key: "cssPostprocessor",
+  // },
   {
     name: "CSS\xa0Build\xa0System",
     key: "cssBuildSystem",
@@ -614,14 +616,15 @@ export const TOOLS = [
   },
   {
     name: "Sass",
-    cssPreprocessor: true,
+    specification: true,
+    compilerTranspiler: true,
     picto: "https://svgl.app/library/sass.svg",
     related: ["PostCSS"],
     pos: { x: 280.0864804668708, y: 819.8871188637629 },
   },
   {
     name: "PostCSS",
-    cssPostprocessor: true,
+    compilerTranspiler: true,
     picto: "https://svgl.app/library/postcss.svg",
     pos: { x: 451.57491388487125, y: 723.6298636886961 },
   },
@@ -629,7 +632,8 @@ export const TOOLS = [
     name: "Tailwind",
     cssBuildSystem: true,
     picto: "https://svgl.app/library/tailwindcss.svg",
-    uses: ["Lightning\xa0CSS", "PostCSS"],
+    uses: ["Lightning\xa0CSS"],
+    related: ["PostCSS"],
     pos: { x: 604.1196342922309, y: 594.3508429689566 },
   },
 ] as const satisfies Tool[];

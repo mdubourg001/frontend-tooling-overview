@@ -13,6 +13,8 @@ type Props = {
   isSimulationRunning: boolean;
   handleWhatClick: () => void;
   handleToggleSimulationRunning: () => void;
+  handleResetClick: () => void;
+  handleShuffleClick: () => void;
   handleFilterChange: (key: string) => void;
   handleCheckAll: () => void;
   handleUncheckAll: () => void;
@@ -26,6 +28,8 @@ export function CategoryFilters({
   isSimulationRunning,
   handleWhatClick,
   handleToggleSimulationRunning,
+  handleResetClick,
+  handleShuffleClick,
   handleFilterChange,
   handleCheckAll,
   handleUncheckAll,
@@ -39,16 +43,9 @@ export function CategoryFilters({
   return (
     <div className="flex flex-col gap-y-2">
       <h1 className="text-2xl font-extrabold ">Frontend Tooling Overview</h1>
-      <div className="flex justify-center md:justify-normal items-center gap-x-2 md:mb-4">
+      <div className="flex justify-center md:justify-normal items-center flex-wrap gap-x-2 gap-y-1 md:mb-4">
         <button className="underline cursor-pointer" onClick={handleWhatClick}>
           What is it?
-        </button>
-        <span aria-hidden>•</span>
-        <button
-          className="underline cursor-pointer"
-          onClick={handleToggleSimulationRunning}
-        >
-          {isSimulationRunning ? "Stop" : "Start"}&nbsp;simulation
         </button>
         <span aria-hidden>•</span>
         <a
@@ -59,6 +56,25 @@ export function CategoryFilters({
         >
           GitHub
         </a>
+
+        <div aria-hidden className="basis-full h-0" />
+        <button
+          className="underline cursor-pointer"
+          onClick={handleToggleSimulationRunning}
+        >
+          {isSimulationRunning ? "Stop" : "Start"}&nbsp;simulation
+        </button>
+        <span aria-hidden>•</span>
+        <button className="underline cursor-pointer" onClick={handleResetClick}>
+          Reset
+        </button>
+        <span aria-hidden>•</span>
+        <button
+          className="underline cursor-pointer"
+          onClick={handleShuffleClick}
+        >
+          Shuffle
+        </button>
       </div>
 
       <div className="relative hidden md:flex flex-col gap-y-2">
