@@ -39,7 +39,7 @@ export function CategoryFilters({
   return (
     <div className="flex flex-col gap-y-2">
       <h1 className="text-2xl font-extrabold ">Frontend Tooling Overview</h1>
-      <div className="flex items-center gap-x-2 mb-4">
+      <div className="flex justify-center md:justify-normal items-center gap-x-2 md:mb-4">
         <button className="underline cursor-pointer" onClick={handleWhatClick}>
           What is it?
         </button>
@@ -61,7 +61,7 @@ export function CategoryFilters({
         </a>
       </div>
 
-      <div className="relative flex flex-col gap-y-2">
+      <div className="relative hidden md:flex flex-col gap-y-2">
         {/* <textarea
           className="absolute bottom-0 rotate-180 w-full h-full bg-gradient-to-br from-orange-300 to-rose-300 z-10"
           name=""
@@ -82,6 +82,7 @@ export function CategoryFilters({
                     "bg-white border-slate-200": !filter.checked,
                   }
                 )}
+                aria-label={`Toggle ${filter.label}`}
                 onMouseEnter={() => handleCategoryMouseEnter(filter.key)}
                 onMouseLeave={handleCategoryMouseLeave}
               >
@@ -119,7 +120,7 @@ export function CategoryFilters({
         })}
       </div>
 
-      <div className="flex gap-x-2 font-bold text-black border-t pt-4 mt-2">
+      <div className="hidden md:flex gap-x-2 font-bold text-black border-t pt-4 mt-2">
         <button
           className="cursor-pointer px-2 py-1 border rounded active:scale-95 transition-transform"
           onClick={handleCheckAll}

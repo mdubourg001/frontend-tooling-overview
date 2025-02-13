@@ -83,7 +83,7 @@ export function useModal<T = undefined>({
         {children?.(metadata)}
 
         {(cancelLabel || confirmLabel) && (
-          <div className="flex justify-end mt-16 gap-x-8">
+          <div className="flex mt-auto justify-end md:mt-16 gap-x-8">
             {cancelLabel && (
               <button
                 className="cursor-pointer hover:text-orange-300 underline transition-colors"

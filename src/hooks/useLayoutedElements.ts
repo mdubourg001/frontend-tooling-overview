@@ -122,19 +122,11 @@ export function useLayoutedElements() {
     function startOnMountAndFitView() {
       const bag = result[1] as { toggle: () => void };
 
-      let timeout: number;
       if (bag && "toggle" in bag) {
         bag.toggle();
 
-        timeout = setTimeout(
-          () => fitView({ padding: 200, duration: 2000 }),
-          1000
-        );
+        fitView({ padding: 200, duration: 2000 });
       }
-
-      return () => {
-        clearTimeout(timeout);
-      };
     },
     [result]
   );

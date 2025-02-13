@@ -25,7 +25,7 @@ export function Modal({
         <Dialog.Content
           data-testid={dataTestId}
           className={clsx(
-            "fixed z-40 w-10/12 max-w-[606px] py-5 px-6 border-4 border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 text-white max-h-[85vh] -translate-x-1/2 -translate-y-1/2 rounded-md top-1/2 left-1/2 overflow-y-scroll",
+            "fixed flex flex-col z-40 w-full md:w-10/12 max-w-screen md:max-w-[606px] py-5 px-6 border-4 border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900 text-white h-full md:h-auto max-h-screen md:max-h-[85vh] md:-translate-x-1/2 md:-translate-y-1/2 rounded-md inset-0 md:bottom-auto md:right-auto md:top-1/2 md:left-1/2 overflow-y-scroll",
             className
           )}
           onEscapeKeyDown={onRequestClose}

@@ -195,7 +195,7 @@ function LayoutFlow() {
           pos
         </button> */}
 
-        <aside className="fixed left-10 top-10">
+        <aside className="fixed left-6 right-6 top-6 p-4 md:left-10 md:right-auto md:top-10 md:p-0 bg-gradient-to-br md:bg-none from-orange-300 to-rose-300 z-10 border md:border-0 text-center md:text-left">
           <CategoryFilters
             filters={filters}
             isSimulationRunning={isRunning?.()}
