@@ -31,7 +31,7 @@ function Tool({
           "px-4 py-3": size === "regular",
           "cursor-pointer hover:border-yellow-400 transition-colors":
             !!handleClick,
-          "!border-8 !border-red-600": data.description,
+          // "!border-8 !border-red-600": data.description,
         },
         className
       )}
