@@ -5,28 +5,37 @@ import type { Tool } from "../types";
 type Props = {
   tool: Tool;
   sameCategoryTools: Tool[];
+  handleCategoryClick: (key: string) => void;
+  handleToolClick: (name: string) => void;
 };
 
-function ToolModalContent({ tool, sameCategoryTools = [] }: Props) {
+function ToolModalContent({
+  tool,
+  sameCategoryTools = [],
+  handleCategoryClick,
+  handleToolClick,
+}: Props) {
   if (!tool) {
     return null;
   }
+
+  // TODO: categories tags
 
   return (
     <div className="flex flex-col gap-y-4">
       {"description" in tool && (
         <>
-          <h2 className="italic text-2xl border-b w-fit border-orange-300 mb-4">
+          <h2 className="italic text-2xl border-b w-fit border-orange-300">
             Description
           </h2>
-          <p>{tool?.description}</p>
+          <p>{tool?.description?.({ handleCategoryClick, handleToolClick })}</p>
         </>
       )}
 
       {"links" in tool && (tool.links?.length ?? 0) > 0 && (
         <>
           <h2 className="italic text-2xl border-b w-fit border-orange-300 mb-4">
-            Links
+            Related resources
           </h2>
           <ul className="list-disc list-inside">
             {tool.links?.map((link) => (

@@ -25,14 +25,14 @@ import type { Tool as ToolType } from "../types";
 
 import "@xyflow/react/dist/style.css";
 
-const initialNodes: Node[] = TOOLS.map((tool, index) => ({
+const initialNodes: Node[] = Object.values(TOOLS).map((tool, index) => ({
   id: tool.name,
   type: "custom",
   data: tool,
   position: { x: tool.pos.x ?? 0, y: tool.pos.y ?? index * 100 },
 }));
 
-const initialEdges: Edge[] = TOOLS.flatMap((tool) => {
+const initialEdges: Edge[] = Object.values(TOOLS).flatMap((tool) => {
   let edges: Edge[] = [];
 
   if ("uses" in tool) {
@@ -97,7 +97,9 @@ function LayoutFlow() {
   const focusedCategoryObject = CATEGORIES.find(
     (cat) => cat.key === focusedCategory
   );
-  const focusedCategoryTools = TOOLS.filter((tool) => tool[focusedCategory]);
+  const focusedCategoryTools = Object.values(TOOLS).filter(
+    (tool) => tool[focusedCategory]
+  );
   const { toggle: toggleFocusCategoryModal, render: renderFocusCategoryModal } =
     useModal({
       title: focusedCategoryObject?.name,
@@ -118,21 +120,28 @@ function LayoutFlow() {
       onCancel: () => setFocusedCategory(null),
     });
 
-  const focusedToolObject = TOOLS.find(
-    (tool) => tool.name === focusedTool
-  ) as ToolType;
+  const focusedToolObject = focusedTool
+    ? (TOOLS[focusedTool] as ToolType)
+    : null;
   const { toggle: toggleFocusToolModal, render: renderFocusToolModal } =
     useModal({
       title: (
         <div className="flex gap-x-2 items-center">
-          <ToolPicto tool={focusedToolObject} />
+          <ToolPicto picto={focusedToolObject?.picto} />
           <span>{focusedToolObject?.name}</span>
         </div>
       ),
       cancelLabel: "",
       confirmLabel: "",
       initialIsOpen: !!focusedToolObject,
-      children: () => <ToolModalContent tool={focusedToolObject} tools={[]} />,
+      children: () => (
+        <ToolModalContent
+          tool={focusedToolObject}
+          tools={[]}
+          handleCategoryClick={handleFocusCategoryClick}
+          handleToolClick={handleFocusToolClick}
+        />
+      ),
       onCancel: () => setFocusedTool(null),
     });
 
@@ -172,7 +181,7 @@ function LayoutFlow() {
 
     setNodes((nodes) =>
       nodes.map((node) => {
-        const tool = TOOLS.find((tool) => tool.name === node.id);
+        const tool = TOOLS[node.id];
 
         if (tool) {
           return {
@@ -206,31 +215,82 @@ function LayoutFlow() {
     setTimeout(toggle);
   };
 
+  const handleFocusCategoryClick = (key: string) => {
+    setFocusedCategory(key);
+
+    if (!focusedCategory) {
+      toggleFocusCategoryModal();
+    }
+  };
+
+  const handleFocusToolClick = (name: string) => {
+    setFocusedTool(name);
+
+    if (!focusedTool) {
+      toggleFocusToolModal();
+    }
+  };
+
   // ----- rendering -----
 
   return (
-    <ReactFlow
-      nodeTypes={{ custom: Tool }}
-      nodes={filteredNodes}
-      edges={filteredEdges}
-      minZoom={0.45}
-      defaultViewport={{ x: 821, y: 471, zoom: 2 }}
-      onNodeDragStart={dragEvents.start}
-      onNodeDrag={dragEvents.drag}
-      onNodeDragStop={dragEvents.stop}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onNodeClick={(_, node: Node) => {
-        setFocusedTool(node.data.name as string);
-        toggleFocusToolModal();
-      }}
-    >
-      <Panel>
-        {renderWhatModal()}
-        {renderFocusCategoryModal()}
-        {renderFocusToolModal()}
+    <>
+      <aside className="fixed left-6 right-6 top-6 p-4 md:left-10 md:right-auto md:top-10 md:p-0 bg-gradient-to-br md:bg-none from-orange-300 to-rose-300 border md:border-0 text-center md:text-left z-10">
+        <CategoryFilters
+          filters={filters}
+          isSimulationRunning={initialized && isRunning?.()}
+          handleWhatClick={toggleWhatModal}
+          handleToggleSimulationRunning={toggle}
+          handleResetClick={handleResetClick}
+          handleShuffleClick={handleShuffleClick}
+          handleFilterChange={(key) => {
+            setFilters((filters) =>
+              filters.map((f) =>
+                f.key === key ? { ...f, checked: !f.checked } : f
+              )
+            );
+          }}
+          handleCheckAll={() => {
+            setFilters((filters) =>
+              filters.map((f) => ({ ...f, checked: true }))
+            );
+          }}
+          handleUncheckAll={() => {
+            setFilters((filters) =>
+              filters.map((f) => ({ ...f, checked: false }))
+            );
+          }}
+          handleFocusCategoryClick={handleFocusCategoryClick}
+          handleCategoryMouseEnter={(key) => {
+            if (filters.some((f) => f.key === key && f.checked)) {
+              setEmphasizedCategory(key);
+            }
+          }}
+          handleCategoryMouseLeave={() => setEmphasizedCategory(null)}
+        />
+      </aside>
 
-        {/* <button
+      <ReactFlow
+        nodeTypes={{ custom: Tool }}
+        nodes={filteredNodes}
+        edges={filteredEdges}
+        minZoom={0.45}
+        defaultViewport={{ x: 821, y: 471, zoom: 2 }}
+        onNodeDragStart={dragEvents.start}
+        onNodeDrag={dragEvents.drag}
+        onNodeDragStop={dragEvents.stop}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onNodeClick={(_, node: Node) => {
+          handleFocusToolClick(node.data.name as string);
+        }}
+      >
+        <Panel>
+          {renderWhatModal()}
+          {renderFocusCategoryModal()}
+          {renderFocusToolModal()}
+
+          {/* <button
           onClick={() => {
             console.log(
               nodes.map((n) => ({ name: n.data.name, pos: n.position }))
@@ -239,46 +299,9 @@ function LayoutFlow() {
         >
           pos
         </button> */}
-
-        <aside className="fixed left-6 right-6 top-6 p-4 md:left-10 md:right-auto md:top-10 md:p-0 bg-gradient-to-br md:bg-none from-orange-300 to-rose-300 z-10 border md:border-0 text-center md:text-left">
-          <CategoryFilters
-            filters={filters}
-            isSimulationRunning={initialized && isRunning?.()}
-            handleWhatClick={toggleWhatModal}
-            handleToggleSimulationRunning={toggle}
-            handleResetClick={handleResetClick}
-            handleShuffleClick={handleShuffleClick}
-            handleFilterChange={(key) => {
-              setFilters((filters) =>
-                filters.map((f) =>
-                  f.key === key ? { ...f, checked: !f.checked } : f
-                )
-              );
-            }}
-            handleCheckAll={() => {
-              setFilters((filters) =>
-                filters.map((f) => ({ ...f, checked: true }))
-              );
-            }}
-            handleUncheckAll={() => {
-              setFilters((filters) =>
-                filters.map((f) => ({ ...f, checked: false }))
-              );
-            }}
-            handleFocusCategoryClick={(key: string) => {
-              setFocusedCategory(key);
-              toggleFocusCategoryModal();
-            }}
-            handleCategoryMouseEnter={(key) => {
-              if (filters.some((f) => f.key === key && f.checked)) {
-                setEmphasizedCategory(key);
-              }
-            }}
-            handleCategoryMouseLeave={() => setEmphasizedCategory(null)}
-          />
-        </aside>
-      </Panel>
-    </ReactFlow>
+        </Panel>
+      </ReactFlow>
+    </>
   );
 }
 

@@ -1,23 +1,37 @@
-import type { Tool } from "../types";
+import clsx from "clsx";
 
 type Props = {
-  tool: Tool;
+  picto?: string;
+  size?: "small" | "regular";
 };
 
-export function ToolPicto({ tool }: Props) {
-  if (!tool.picto) {
+export function ToolPicto({ picto, size = "regular" }: Props) {
+  if (!picto) {
     return null;
   }
 
-  if (tool.picto.startsWith("http")) {
+  if (picto.startsWith("http")) {
     return (
       <img
-        className="border-0 w-8 h-8"
-        src={tool.picto}
+        aria-hidden
+        className={clsx("inline-block border-0 ", {
+          "w-3 h-3": size === "small",
+          "w-8 h-8": size === "regular",
+        })}
+        src={picto}
         alt={`Logo of ${name}`}
       />
     );
   } else {
-    return <span className="text-3xl">{tool.picto}</span>;
+    return (
+      <span
+        aria-hidden
+        className={clsx("inline-block", {
+          "text-3xl": size === "regular",
+        })}
+      >
+        {picto}
+      </span>
+    );
   }
 }

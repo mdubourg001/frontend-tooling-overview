@@ -42,8 +42,8 @@ export function CategoryFilters({
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h1 className="text-2xl font-extrabold ">Frontend Tooling Overview</h1>
-      <div className="flex justify-center md:justify-normal items-center flex-wrap gap-x-2 gap-y-1 md:mb-4">
+      <h1 className="text-2xl font-extrabold">Frontend Tooling Overview</h1>
+      <div className="flex justify-center md:justify-normal items-center gap-x-2">
         <button className="underline cursor-pointer" onClick={handleWhatClick}>
           What is it?
         </button>
@@ -56,8 +56,9 @@ export function CategoryFilters({
         >
           GitHub
         </a>
+      </div>
 
-        <div aria-hidden className="basis-full h-0" />
+      <div className="flex justify-center md:justify-normal items-center gap-x-2 mt-1 md:mb-4">
         <button
           className="underline cursor-pointer"
           onClick={handleToggleSimulationRunning}
@@ -89,7 +90,7 @@ export function CategoryFilters({
             CATEGORIES.find((cat) => cat.key === filter.key) ?? {};
 
           return (
-            <div className="flex items-center gap-x-2" key={filter.key}>
+            <div className="flex items-center gap-x-2 w-fit" key={filter.key}>
               <button
                 className={cx(
                   "flex items-center gap-x-2 px-2 py-1 border-2 rounded w-fit text-black cursor-pointer active:scale-95 transition-transform",

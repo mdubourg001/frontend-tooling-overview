@@ -40,7 +40,7 @@ function CategoryModalContent({
             {tools.map((tool, index) => (
               <>
                 <div key={tool.name} className="flex items-center gap-x-2">
-                  <ToolPicto tool={tool} />
+                  <ToolPicto picto={tool.picto} />
 
                   <button
                     className="cursor-pointer hover:text-orange-300 hover:underline"
