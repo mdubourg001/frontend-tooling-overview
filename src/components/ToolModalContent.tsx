@@ -21,6 +21,11 @@ function ToolModalContent({
 
   // TODO: categories tags
 
+  const description = tool?.description?.({
+    handleCategoryClick,
+    handleToolClick,
+  });
+
   return (
     <div className="flex flex-col gap-y-4">
       {"description" in tool && (
@@ -28,7 +33,7 @@ function ToolModalContent({
           <h2 className="italic text-2xl border-b w-fit border-orange-300">
             Description
           </h2>
-          <p>{tool?.description?.({ handleCategoryClick, handleToolClick })}</p>
+          {typeof description === "string" ? <p>{description}</p> : description}
         </>
       )}
 

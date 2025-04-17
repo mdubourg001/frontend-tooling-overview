@@ -37,7 +37,7 @@ export function CategoryFilters({
   handleCategoryMouseEnter,
   handleCategoryMouseLeave,
 }: Props) {
-  const prezMode = true;
+  const prezMode = false;
   const { fitView } = useReactFlow();
 
   return (

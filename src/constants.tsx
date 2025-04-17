@@ -47,6 +47,12 @@ export const CATEGORIES = [
   {
     name: "View\xa0Library",
     key: "viewLibrary",
+    description: (
+      <p>
+        Libraries providing a set of tools to build user interfaces (UI) using
+        components.
+      </p>
+    ),
   },
   {
     name: "Compiler\xa0/\xa0Transpiler",
@@ -714,11 +720,24 @@ export const TOOLS = {
     picto: "https://svgl.app/library/react_dark.svg",
     related: ["Angular"],
     pos: { x: -58.06429963253298, y: -34.83767498106292 },
-    description: () => (
+    description: ({ handleToolClick }) => (
       <p>
-        React is a JavaScript library for building user interfaces. It is
-        maintained by Facebook and a community of individual developers and
-        companies.
+        React is a JavaScript library for building user interfaces. It is often
+        used to build Single-Page applications using bundlers like{" "}
+        <Tool
+          data={TOOLS["Vite"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        or through meta-frameworks like{" "}
+        <Tool
+          data={TOOLS["Next.js"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        to provide a complete solution for building complex applications.
       </p>
     ),
   },
@@ -728,12 +747,24 @@ export const TOOLS = {
     picto: "https://svgl.app/library/vue.svg",
     related: ["React"],
     pos: { x: -81.52622486585564, y: 164.0438743755371 },
-    description: () => (
+    description: ({ handleToolClick }) => (
       <p>
         Vue.js is a JavaScript framework for building user interfaces. It is
-        designed to be incrementally adoptable and can function as a
-        full-featured framework for building complex applications when used with
-        its supporting libraries and tooling.
+        often used to build Single-Page applications using bundlers like{" "}
+        <Tool
+          data={TOOLS["Vite"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        or through meta-frameworks like{" "}
+        <Tool
+          data={TOOLS["Nuxt"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        to provide a complete solution for building complex applications.
       </p>
     ),
   },
@@ -746,7 +777,7 @@ export const TOOLS = {
     description: () => (
       <p>
         Angular is a TypeScript-based web application framework developed by
-        Google. It provides a complete solution for building complex enterprise
+        Google. It provides a complete solution for building complex
         applications, including built-in tools for routing, form handling, and
         state management.
       </p>
@@ -808,7 +839,7 @@ export const TOOLS = {
       </p>
     ),
   },
-  Nextjs: {
+  "Next.js": {
     name: "Next.js",
     devServer: true,
     picto: "https://svgl.app/library/nextjs_icon_dark.svg",
@@ -816,8 +847,15 @@ export const TOOLS = {
     pos: { x: -168.6625770666429, y: -168.14710421098167 },
     description: ({ handleToolClick }) => (
       <p>
-        Next.js is a React framework that enables server-side rendering, static
-        site generation, and modern development features. It uses either{" "}
+        Next.js is a framework for{" "}
+        <Tool
+          data={TOOLS["React"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        that enables server-side rendering, static site generation, and modern
+        development features. It uses either{" "}
         <Tool
           data={TOOLS["Webpack"]}
           size="small"
@@ -831,14 +869,8 @@ export const TOOLS = {
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        for bundling and provides an optimized development experience for{" "}
-        <Tool
-          data={TOOLS["React"]}
-          size="small"
-          withHandles={false}
-          handleClick={handleToolClick}
-        />{" "}
-        applications.
+        for bundling and provides an optimized development experience for
+        building React applications.
       </p>
     ),
   },
@@ -941,8 +973,8 @@ export const TOOLS = {
     description: () => (
       <p>
         SWC (Speedy Web Compiler) is a super-fast TypeScript/JavaScript compiler
-        written in Rust. It can be used for compilation, minification, bundling
-        and more, providing significant performance improvements over
+        written in Rust. It can be used for parsing, compilation and
+        minification, providing significant performance improvements over
         JavaScript-based alternatives.
       </p>
     ),
@@ -980,8 +1012,7 @@ export const TOOLS = {
       <p>
         esbuild is an extremely fast JavaScript bundler and minifier written in
         Go. It provides superior build performance compared to traditional
-        JavaScript-based tools, often completing builds 10-100x faster than
-        alternatives.
+        JavaScript-based tools.
       </p>
     ),
   },
@@ -995,9 +1026,9 @@ export const TOOLS = {
     pos: { x: 729.3845958163022, y: 435.877239495677 },
     description: () => (
       <p>
-        Lightning CSS is a CSS parser, transformer, bundler, and minifier
-        written in Rust. It provides extremely fast CSS processing capabilities
-        while supporting modern CSS features and optimizations.
+        Lightning CSS is a CSS parser, compiler, bundler, and minifier written
+        in Rust. It provides extremely fast CSS processing capabilities while
+        supporting modern CSS features and optimizations.
       </p>
     ),
   },
@@ -1036,8 +1067,14 @@ export const TOOLS = {
     pos: { x: -280.43310538839745, y: 420.80474737201945 },
     description: ({ handleToolClick }) => (
       <p>
-        Rolldown is a high-performance drop-in replacement for Rollup, written
-        in Rust. It uses{" "}
+        Rolldown is a high-performance drop-in replacement for{" "}
+        <Tool
+          data={TOOLS["Rollup"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        , written in Rust. It uses{" "}
         <Tool
           data={TOOLS["Oxc"]}
           size="small"
@@ -1161,10 +1198,10 @@ export const TOOLS = {
     description: () => (
       <p>
         Oxc is a collection of JavaScript/TypeScript tools written in Rust,
-        providing high-performance parsing, linting, formatting, and
-        transformation capabilities. It aims to be a comprehensive toolchain
-        that can replace multiple existing JavaScript tools while offering
-        significant performance improvements through its Rust implementation.
+        providing high-performance parsing, linting, formatting, and compilation
+        capabilities. It aims to be a comprehensive toolchain that can replace
+        multiple existing JavaScript tools while offering significant
+        performance improvements through its Rust implementation.
       </p>
     ),
   },
@@ -1186,13 +1223,14 @@ export const TOOLS = {
   Biome: {
     name: "Biome",
     formatter: true,
+    linter: true,
     picto: "https://avatars.githubusercontent.com/u/140182603?s=48&v=4",
     pos: { x: 351.058283773523, y: 414.8054076904539 },
     description: () => (
       <p>
         Biome is a performant toolchain for web projects, written in Rust. It
-        provides fast formatting capabilities while aiming to be a drop-in
-        replacement for existing tools in the JavaScript ecosystem.
+        provides fast formatting and linting capabilities while aiming to be a
+        drop-in replacement for existing tools in the JavaScript ecosystem.
       </p>
     ),
   },
@@ -1243,7 +1281,7 @@ export const TOOLS = {
       <p>
         Vitest is a Vite-native testing framework with a focus on speed. It
         leverages the same configuration, transformers, resolvers, and plugins
-        from your{" "}
+        from a{" "}
         <Tool
           data={TOOLS["Vite"]}
           size="small"
@@ -1345,12 +1383,26 @@ export const TOOLS = {
     picto: "https://svgl.app/library/pnpm.svg",
     related: ["yarn"],
     pos: { x: -284.6818593914294, y: 796.0703695907121 },
-    description: () => (
+    description: ({ handleToolClick }) => (
       <p>
         pnpm is a fast, disk-space efficient package manager for JavaScript
-        projects. Unlike npm or Yarn that create duplicates of packages in each
-        project's node_modules, pnpm uses a content-addressable store to link
-        the same versions of packages across multiple projects.
+        projects. Unlike{" "}
+        <Tool
+          data={TOOLS["npm"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        or{" "}
+        <Tool
+          data={TOOLS["yarn"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        that create duplicates of packages in each project's node_modules, pnpm
+        uses a content-addressable store to link the same versions of packages
+        across multiple projects.
         <br />
         <br />
         This approach significantly reduces disk space usage and speeds up
@@ -1380,11 +1432,17 @@ export const TOOLS = {
     picto: "https://svgl.app/library/sass.svg",
     related: ["PostCSS"],
     pos: { x: 280.0864804668708, y: 819.8871188637629 },
-    description: () => (
+    description: ({ handleToolClick }) => (
       <p>
         Sass (Syntactically Awesome Style Sheets) is a CSS preprocessor that
-        extends CSS with features like variables, nested rules, mixins, and
-        functions.
+        extends{" "}
+        <Tool
+          data={TOOLS["CSS"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        with features like variables, nested rules, mixins, and functions.
         <br />
         <br />
         It helps developers write more maintainable and organized CSS code that
@@ -1399,12 +1457,18 @@ export const TOOLS = {
     compilerTranspiler: true,
     picto: "https://svgl.app/library/postcss.svg",
     pos: { x: 451.57491388487125, y: 723.6298636886961 },
-    description: () => (
+    description: ({ handleToolClick }) => (
       <p>
-        PostCSS is a tool for transforming CSS with JavaScript plugins. It can
-        add vendor prefixes, convert modern CSS features to more compatible
-        versions, lint CSS, support CSS modules, and much more through its
-        extensive ecosystem of plugins.
+        PostCSS is a tool for transforming{" "}
+        <Tool
+          data={TOOLS["CSS"]}
+          size="small"
+          withHandles={false}
+          handleClick={handleToolClick}
+        />{" "}
+        with JavaScript plugins. It can add vendor prefixes, convert modern CSS
+        features to more compatible versions, lint CSS, support CSS modules, and
+        much more through its extensive ecosystem of plugins.
       </p>
     ),
   },

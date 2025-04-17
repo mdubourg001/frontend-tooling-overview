@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQueryState } from "nuqs";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import clsx from "clsx";
@@ -112,6 +112,7 @@ function LayoutFlow() {
           tools={focusedCategoryTools}
           handleToolClick={(toolName: string) => {
             toggleFocusCategoryModal();
+            setFocusedCategory(null);
             setFocusedTool(toolName);
             toggleFocusToolModal();
           }}
@@ -172,6 +173,21 @@ function LayoutFlow() {
     [edges, filteredNodes]
   );
 
+  // ----- effects -----
+
+  useEffect(
+    function controlInitialFocusedToolOrCategory() {
+      if (!focusedToolObject) {
+        setFocusedTool(null);
+      }
+
+      if (!focusedCategoryObject) {
+        setFocusedCategory(null);
+      }
+    },
+    [focusedToolObject, focusedCategoryObject]
+  );
+
   // ----- handlers -----
 
   const handleResetClick = () => {
@@ -217,6 +233,7 @@ function LayoutFlow() {
 
   const handleFocusCategoryClick = (key: string) => {
     setFocusedCategory(key);
+    setFocusedTool(null);
 
     if (!focusedCategory) {
       toggleFocusCategoryModal();

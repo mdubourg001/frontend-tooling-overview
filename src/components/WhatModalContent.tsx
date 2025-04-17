@@ -6,8 +6,8 @@ export function WhatModalContent() {
       </h2>
 
       <p>
-        This is a visual representation of the tools and technologies used in
-        frontend development.
+        This is a visual representation of some of the most common tools and
+        technologies used in frontend development.
       </p>
 
       <p>
