@@ -38,6 +38,7 @@ const initialEdges: Edge[] = Object.values(TOOLS).flatMap((tool) => {
   if ("uses" in tool) {
     edges = tool.uses.map((use) => ({
       id: `${tool.name}-${use}`,
+      type: "simplebezier",
       source: tool.name,
       target: use,
       animated: true,
@@ -73,6 +74,7 @@ const initialEdges: Edge[] = Object.values(TOOLS).flatMap((tool) => {
 
 // TODO: memoize components
 function LayoutFlow() {
+  const [initialRunning, setInitialRunning] = useState(true);
   const [filters, setFilters] = useState(
     CATEGORIES.map((cat) => ({ key: cat.key, label: cat.name, checked: true }))
   );
@@ -85,7 +87,7 @@ function LayoutFlow() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
   const [initialized, { toggle, isRunning }, dragEvents] =
-    useLayoutedElements();
+    useLayoutedElements(initialRunning);
 
   const { toggle: toggleWhatModal, render: renderWhatModal } = useModal({
     title: "Frontend Tooling Overview",
@@ -191,7 +193,7 @@ function LayoutFlow() {
   // ----- handlers -----
 
   const handleResetClick = () => {
-    if (initialized && isRunning?.()) {
+    if (initialized && isRunning?.() && initialRunning) {
       toggle();
     }
 
@@ -210,11 +212,13 @@ function LayoutFlow() {
       })
     );
 
-    setTimeout(toggle);
+    if (initialRunning) {
+      setTimeout(toggle);
+    }
   };
 
   const handleShuffleClick = () => {
-    if (initialized && isRunning?.()) {
+    if (initialized && isRunning?.() && initialRunning) {
       toggle();
     }
 
@@ -228,7 +232,9 @@ function LayoutFlow() {
       }))
     );
 
-    setTimeout(toggle);
+    if (initialRunning) {
+      setTimeout(toggle);
+    }
   };
 
   const handleFocusCategoryClick = (key: string) => {
@@ -257,7 +263,11 @@ function LayoutFlow() {
           filters={filters}
           isSimulationRunning={initialized && isRunning?.()}
           handleWhatClick={toggleWhatModal}
-          handleToggleSimulationRunning={toggle}
+          handleToggleSimulationRunning={() => {
+            const willBeRunning = !isRunning?.();
+            toggle();
+            setInitialRunning(willBeRunning);
+          }}
           handleResetClick={handleResetClick}
           handleShuffleClick={handleShuffleClick}
           handleFilterChange={(key) => {

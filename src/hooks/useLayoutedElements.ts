@@ -18,7 +18,7 @@ const simulation = forceSimulation()
   .alphaTarget(0.05)
   .stop();
 
-export function useLayoutedElements() {
+export function useLayoutedElements(initialRunning: boolean) {
   const { getNodes, setNodes, getEdges, fitView, zoomTo } = useReactFlow();
   const initialized = useNodesInitialized();
 
@@ -98,6 +98,7 @@ export function useLayoutedElements() {
     };
 
     const toggle = () => {
+      console.log("yo");
       if (!running) {
         getNodes().forEach((node, index) => {
           let simNode = nodes[index];
@@ -123,7 +124,9 @@ export function useLayoutedElements() {
       const bag = result[1] as { toggle: () => void };
 
       if (bag && "toggle" in bag) {
-        bag.toggle();
+        if (initialRunning) {
+          bag.toggle();
+        }
 
         fitView({ padding: 200, duration: 2000 });
       }
