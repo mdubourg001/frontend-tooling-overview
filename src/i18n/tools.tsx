@@ -745,8 +745,8 @@ export const toolsEn: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        for parsing and aims to provide significant performance improvements
-        while maintaining compatibility with the Rollup ecosystem.
+        for parsing and minification and aims to provide significant performance
+        improvements while maintaining compatibility with the Rollup ecosystem.
       </p>
     ),
   },
@@ -1095,8 +1095,8 @@ export const toolsFr: Record<string, ToolTranslation> = {
       <>
         <p>
           ECMAScript est une spécification standard pour les langages de script.
-          Les implémentations les plus connues de cette norme sont JavaScript et
-          ActionScript.
+          Les "implémentations" les plus connues de cette norme sont JavaScript
+          et ActionScript.
           <br />
           <br />
           Alors que l'implémentation d'un environnement d'exécution JavaScript
@@ -1131,7 +1131,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
       <p>
         React est une bibliothèque JavaScript pour construire des interfaces
         utilisateur. Elle est souvent utilisée pour construire des applications
-        monopages en utilisant des empaqueteurs comme{" "}
+        monopages en utilisant des bundlers comme{" "}
         <Tool
           data={TOOLS["Vite"]}
           size="small"
@@ -1145,7 +1145,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour fournir une solution complète pour construire des applications
+        afin de fournir une solution complète pour construire des applications
         complexes.
       </p>
     ),
@@ -1175,7 +1175,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
     description: () => (
       <p>
         HTML est une spécification standard pour le langage de balisage
-        structurant le contenu sur le web.
+        structurant le contenu sur le web (entre autres).
         <br />
         <br />
         Les moteurs de rendu des navigateurs sont responsables de
@@ -1284,6 +1284,13 @@ export const toolsFr: Record<string, ToolTranslation> = {
             size="small"
             withHandles={false}
             handleClick={handleToolClick}
+          />{" "}
+          et par l'environnement d'exécution{" "}
+          <Tool
+            data={TOOLS["WinterJS"]}
+            size="small"
+            withHandles={false}
+            handleClick={handleToolClick}
           />
           .
         </p>
@@ -1318,6 +1325,13 @@ export const toolsFr: Record<string, ToolTranslation> = {
             size="small"
             withHandles={false}
             handleClick={handleToolClick}
+          />{" "}
+          et par l'environnement d'exécution{" "}
+          <Tool
+            data={TOOLS["Bun"]}
+            size="small"
+            withHandles={false}
+            handleClick={handleToolClick}
           />
           .
         </p>
@@ -1346,9 +1360,9 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />
-        , Node.js fournit les APIs permettant les E/S, le système de fichiers,
-        le réseau et d'autres opérations asynchrones. Tout cela est orchestré en
-        utilisant une boucle d'événements:{" "}
+        , Node.js fournit les APIs permettant l'I/O, l'accès au système de
+        fichiers, au réseau, et autres opérations asynchrones. Tout cela est
+        orchestré en utilisant une boucle d'événements:{" "}
         <a
           className="underline"
           href="https://libuv.org/"
@@ -1417,12 +1431,12 @@ export const toolsFr: Record<string, ToolTranslation> = {
           handleClick={handleToolClick}
         />{" "}
         et fournit également un ensemble de fonctionnalités intégrées comme la
-        gestion de paquets, l'exécution de tests et l'empaquetage.
+        gestion de paquets, l'exécution de tests et le bundling.
         <br />
         <br />
         Il est intéressant de noter que Bun ne s'appuie pas sur un analyseur
         et/ou compilateur externe pour empaqueter les ressources : il implémente
-        le sien.
+        les sien.
       </p>
     ),
   },
@@ -1448,9 +1462,9 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />
-        , WinterJS fournit les APIs permettant les E/S, le système de fichiers,
-        le réseau et d'autres opérations asynchrones et liées aux Service
-        Workers.
+        , WinterJS fournit les APIs permettant l'I/O, l'accès au système de
+        fichiers, au réseau, et autres opérations asynchrones et liées aux
+        Service Workers.
       </p>
     ),
     links: [
@@ -1488,9 +1502,9 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />
-        , Chrome fournit les APIs permettant les E/S, le système de fichiers, le
-        réseau et d'autres opérations asynchrones. Tout cela est orchestré en
-        utilisant une boucle d'événements:{" "}
+        , Chrome fournit les APIs permettant l'I/O, l'accès au système de
+        fichiers, au réseau, et autres opérations asynchrones. Tout cela est
+        orchestré en utilisant une boucle d'événements:{" "}
         <a
           className="underline"
           href="https://libevent.org/"
@@ -1538,8 +1552,8 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />
-        , Firefox fournit les APIs permettant les E/S, le système de fichiers,
-        le réseau et d'autres opérations asynchrones.
+        , Firefox fournit les APIs permettant l'I/O, l'accès au système de
+        fichiers, au réseau et d'autres opérations asynchrones.
       </p>
     ),
   },
@@ -1571,8 +1585,8 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />
-        , Safari fournit les APIs permettant les E/S, le système de fichiers, le
-        réseau et d'autres opérations asynchrones.
+        , Safari fournit les APIs permettant l'I/O, l'accès au système de
+        fichiers, au réseau et d'autres opérations asynchrones.
       </p>
     ),
   },
@@ -1582,7 +1596,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
       <p>
         Vue.js est un framework JavaScript pour construire des interfaces
         utilisateur. Il est souvent utilisé pour construire des applications
-        monopages en utilisant des empaqueteurs comme{" "}
+        monopages en utilisant des bundlers comme{" "}
         <Tool
           data={TOOLS["Vite"]}
           size="small"
@@ -1596,7 +1610,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour fournir une solution complète pour construire des applications
+        afin de fournir une solution complète pour construire des applications
         complexes.
       </p>
     ),
@@ -1624,7 +1638,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
       <p>
         Vite est un outil de construction frontend moderne qui offre une
         expérience de développement plus rapide et plus légère. Pendant le
-        développement, il utilise les modules ES natifs et{" "}
+        développement, il utilise les ES modules natifs et{" "}
         <Tool
           data={TOOLS["esbuild"]}
           size="small"
@@ -1646,7 +1660,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour un empaquetage optimal.
+        pour un bundling optimisé.
       </p>
     ),
   },
@@ -1762,7 +1776,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
     description: () => (
       <p>
         SWC (Speedy Web Compiler) est un compilateur TypeScript/JavaScript
-        super-rapide écrit en Rust. Il peut être utilisé pour l'analyse, la
+        super-rapide écrit en Rust. Il peut être utilisé pour le parsing, la
         compilation et la minification, offrant des améliorations de performance
         significatives par rapport aux alternatives basées sur JavaScript.
       </p>
@@ -1772,8 +1786,8 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Turbopack: {
     description: ({ handleToolClick }) => (
       <p>
-        Turbopack est un empaqueteur de nouvelle génération écrit en Rust,
-        développé par l'équipe Vercel. Il utilise{" "}
+        Turbopack est un bundler de nouvelle génération écrit en Rust, développé
+        par l'équipe Vercel. Il utilise{" "}
         <Tool
           data={TOOLS["SWC"]}
           size="small"
@@ -1790,7 +1804,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
   esbuild: {
     description: () => (
       <p>
-        esbuild est un empaqueteur et minificateur JavaScript extrêmement rapide
+        esbuild est un bundler et minificateur JavaScript extrêmement rapide
         écrit en Go. Il offre des performances de construction supérieures par
         rapport aux outils traditionnels basés sur JavaScript.
       </p>
@@ -1800,10 +1814,10 @@ export const toolsFr: Record<string, ToolTranslation> = {
   "Lightning CSS": {
     description: () => (
       <p>
-        Lightning CSS est un analyseur, compilateur, empaqueteur et minificateur
-        CSS écrit en Rust. Il fournit des capacités de traitement CSS
-        extrêmement rapides tout en supportant les fonctionnalités CSS modernes
-        et les optimisations.
+        Lightning CSS est un analyseur, compilateur, bundler et minificateur CSS
+        écrit en Rust. Il fournit des capacités de traitement et d'optimisation
+        CSS extrêmement rapides tout en supportant les fonctionnalités CSS
+        modernes.
       </p>
     ),
   },
@@ -1811,16 +1825,16 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Rollup: {
     description: ({ handleToolClick }) => (
       <p>
-        Rollup est un empaqueteur de modules qui excelle dans la production de
-        paquets efficaces à partir de bibliothèques et applications JavaScript.
-        Il utilise{" "}
+        Rollup est un bundler de modules qui excelle dans la production
+        optimisée de bibliothèques et applications JavaScript grâce à son
+        écosystème de plugins important. Il utilise{" "}
         <Tool
           data={TOOLS["Acorn"]}
           size="small"
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour l'analyse et peut s'intégrer avec{" "}
+        pour le parsing et peut s'interfacer avec{" "}
         <Tool
           data={TOOLS["Babel"]}
           size="small"
@@ -1835,7 +1849,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Rolldown: {
     description: ({ handleToolClick }) => (
       <p>
-        Rolldown est un remplacement haute performance pour{" "}
+        Rolldown est un "remplaçant" haute performance pour{" "}
         <Tool
           data={TOOLS["Rollup"]}
           size="small"
@@ -1849,9 +1863,9 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour l'analyse et vise à fournir des améliorations de performance
-        significatives tout en maintenant la compatibilité avec l'écosystème
-        Rollup.
+        pour le parsing et la minification et vise à fournir des améliorations
+        de performance significatives tout en maintenant la compatibilité avec
+        l'écosystème Rollup.
       </p>
     ),
   },
@@ -1859,23 +1873,23 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Webpack: {
     description: ({ handleToolClick }) => (
       <p>
-        Webpack est un empaqueteur de modules statiques pour les applications
-        JavaScript modernes. Il construit un graphe de dépendances et empaquette
-        les modules en fichiers de sortie optimisés. Il utilise{" "}
+        Webpack est un bundler de modules statiques pour les applications
+        JavaScript. Il construit un graphe de dépendances et empaquette les
+        modules en fichiers de sortie optimisés. Il utilise{" "}
         <Tool
           data={TOOLS["Acorn"]}
           size="small"
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour l'analyse,{" "}
+        pour le parsing,{" "}
         <Tool
           data={TOOLS["Babel"]}
           size="small"
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour les transformations et{" "}
+        pour la compilation et{" "}
         <Tool
           data={TOOLS["Terser"]}
           size="small"
@@ -1890,8 +1904,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Rspack: {
     description: ({ handleToolClick }) => (
       <p>
-        Rspack est un empaqueteur basé sur Rust qui vise à être un remplacement
-        direct de{" "}
+        Rspack est un bundler basé sur Rust qui vise à être un remplaçant de{" "}
         <Tool
           data={TOOLS["Webpack"]}
           size="small"
@@ -1905,7 +1918,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour le traitement JavaScript et fournit des améliorations de
+        pour la compilation et la minification et fournit des améliorations de
         performance significatives tout en maintenant la compatibilité avec
         l'écosystème Webpack.
       </p>
@@ -1915,15 +1928,14 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Parcel: {
     description: ({ handleToolClick }) => (
       <p>
-        Parcel est un empaqueteur d'applications web sans configuration qui
-        utilise{" "}
+        Parcel est un bundler d'applications web sans configuration qui utilise{" "}
         <Tool
           data={TOOLS["SWC"]}
           size="small"
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        pour le traitement JavaScript et{" "}
+        pour la compilation JavaScript et{" "}
         <Tool
           data={TOOLS["Lightning\xa0CSS"]}
           size="small"
@@ -1942,8 +1954,8 @@ export const toolsFr: Record<string, ToolTranslation> = {
       <p>
         Terser est un minificateur JavaScript qui compresse et altère le code
         JavaScript pour réduire sa taille. Il est largement utilisé dans les
-        constructions de production pour optimiser les paquets JavaScript pour
-        le déploiement.
+        constructions de production pour optimiser les paquets JavaScript avant
+        leur déploiement.
       </p>
     ),
   },
@@ -1951,9 +1963,9 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Oxc: {
     description: () => (
       <p>
-        Oxc est une collection d'outils JavaScript/TypeScript écrits en Rust,
-        fournissant des capacités d'analyse, de linting, de formatage et de
-        compilation haute performance. Il vise à être une chaîne d'outils
+        Oxc est un ensemble d'outils JavaScript/TypeScript écrits en Rust,
+        fournissant des capacités de parsing, d'analyse statique, de formatage
+        et de compilation haute performance. Il vise à être une chaîne d'outils
         complète qui peut remplacer plusieurs outils JavaScript existants tout
         en offrant des améliorations de performance significatives grâce à son
         implémentation en Rust.
@@ -1976,9 +1988,9 @@ export const toolsFr: Record<string, ToolTranslation> = {
     description: () => (
       <p>
         Biome est une chaîne d'outils performante pour les projets web, écrite
-        en Rust. Elle fournit des capacités de formatage et de linting rapides
-        tout en visant à être un remplacement direct des outils existants dans
-        l'écosystème JavaScript.
+        en Rust. Elle fournit des capacités de parsing, d'analyse statique, de
+        formatage et de linting rapides tout en visant à être un remplacement
+        direct des outils existants dans l'écosystème JavaScript.
       </p>
     ),
   },
@@ -1986,10 +1998,11 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Eslint: {
     description: () => (
       <p>
-        ESLint est un outil d'analyse de code statique pour identifier les
-        motifs problématiques dans le code JavaScript. Il aide à maintenir la
-        qualité du code en appliquant les conventions de codage et en trouvant
-        les erreurs potentielles avant qu'elles ne se produisent à l'exécution.
+        ESLint est un outil d'analyse statique de code JavaScript identifiant
+        les motifs problématiques dans le code JavaScript. Il aide à maintenir
+        la qualité du code en appliquant les conventions de codage et en
+        trouvant les erreurs potentielles avant qu'elles ne se produisent à
+        l'exécution.
       </p>
     ),
   },
@@ -2024,11 +2037,11 @@ export const toolsFr: Record<string, ToolTranslation> = {
           handleClick={handleToolClick}
         />{" "}
         avec un focus sur la vitesse. Il exploite la même configuration, les
-        mêmes transformateurs, résolveurs et plugins d'une application Vite.
+        mêmes compilateurs, résolveurs et plugins qu'une application Vite.
         <br />
         <br />
         Il est conçu pour être compatible avec l'API de Jest tout en fournissant
-        un support de première classe pour TypeScript, ESM et autres
+        un support de première classe pour TypeScript, ES Modules et autres
         technologies web modernes. L'intégration avec Vite le rend extrêmement
         rapide pour les tests unitaires et d'intégration.
       </p>
@@ -2098,7 +2111,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
         <br />
         <br />
         npm consiste à la fois en un outil d'interface en ligne de commande
-        (CLI) pour installer et gérer les paquets et un registre en ligne qui
+        (CLI) pour installer et gérer les paquets et en un registre en ligne qui
         héberge les paquets JavaScript.
       </p>
     ),
@@ -2107,7 +2120,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
   pnpm: {
     description: ({ handleToolClick }) => (
       <p>
-        pnpm est un gestionnaire de paquets rapide et efficace en espace disque
+        pnpm est un gestionnaire de paquets rapide et économe en espace disque
         pour les projets JavaScript. Contrairement à{" "}
         <Tool
           data={TOOLS["npm"]}
@@ -2123,7 +2136,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
           handleClick={handleToolClick}
         />{" "}
         qui créent des doublons de paquets dans chaque node_modules de projet,
-        pnpm utilise un magasin adressé par contenu pour lier les mêmes versions
+        pnpm utilise un store adressé par contenu pour lier les mêmes versions
         de paquets à travers plusieurs projets.
         <br />
         <br />
@@ -2140,7 +2153,7 @@ export const toolsFr: Record<string, ToolTranslation> = {
       <p>
         Yarn est un outil de gestion de dépendances rapide, fiable et sécurisé
         pour les projets JavaScript. Il a été créé pour résoudre les problèmes
-        de performance et de sécurité avec npm tout en fournissant des
+        de performance et de sécurité de npm tout en fournissant des
         fonctionnalités supplémentaires comme les espaces de travail et le
         plug'n'play.
       </p>
@@ -2180,10 +2193,10 @@ export const toolsFr: Record<string, ToolTranslation> = {
           withHandles={false}
           handleClick={handleToolClick}
         />{" "}
-        avec des plugins JavaScript. Il peut ajouter des préfixes de
-        fournisseur, convertir les fonctionnalités CSS modernes en versions plus
-        compatibles, linter CSS, supporter les modules CSS et bien plus à
-        travers son écosystème étendu de plugins.
+        avec des plugins JavaScript. Grâce à son écosystème étendu de plugins,
+        il peut ajouter des préfixes de fournisseur, convertir les
+        fonctionnalités CSS modernes en versions plus anciennes, analyser la
+        syntaxe CSS et bien plus.
       </p>
     ),
   },
@@ -2191,9 +2204,9 @@ export const toolsFr: Record<string, ToolTranslation> = {
   Tailwind: {
     description: ({ handleToolClick }) => (
       <p>
-        Tailwind CSS est un framework CSS utility-first qui fournit des classes
-        utilitaires de bas niveau pour construire des designs personnalisés. Il
-        utilise{" "}
+        Tailwind CSS est un framework CSS "utility-first" qui fournit des
+        classes utilitaires de bas niveau pour construire des designs
+        personnalisés. Il utilise{" "}
         <Tool
           data={TOOLS["Lightning\xa0CSS"]}
           size="small"

@@ -203,7 +203,7 @@ export const categoriesFr: Record<string, CategoryTranslation> = {
   jsRuntime: {
     name: "Runtime JS",
     description:
-      "Environnement d'exécution JavaScript fournissant des APIs pour les opérations d'E/S (réseau, accès au système de fichiers, multithreading, RTC) basé sur une architecture événementielle et asynchrone.",
+      "Environnement d'exécution JavaScript fournissant des APIs pour les opérations d'I/O (réseau, accès au système de fichiers, multithreading, RTC) basé sur une architecture événementielle et asynchrone.",
   },
   typeChecker: {
     name: "Type Checker",
@@ -258,16 +258,16 @@ export const categoriesFr: Record<string, CategoryTranslation> = {
         <br />
         <span>
           Les "méta-frameworks" modernes et outils de construction (ex. Vite,
-          Next.js, Astro...) utilisent des empaqueteurs en interne pour
-          permettre l'optimisation et l'utilisation prête à l'emploi de nombreux
-          types de ressources (ex. fichiers TypeScript, modules CSS, images,
-          fichiers JSON...).
+          Next.js, Astro...) utilisent des bundlers en interne pour permettre
+          l'optimisation et l'utilisation prête à l'emploi de nombreux types de
+          ressources (ex. fichiers TypeScript, modules CSS, images, fichiers
+          JSON...).
         </span>
         <br />
         <br />
         <span>
-          Les empaqueteurs sont également largement utilisés pour la compilation
-          et l'empaquetage de bibliothèques.
+          Les bundlers sont également largement utilisés pour la compilation et
+          le packaging de bibliothèques.
         </span>
       </>
     ),
@@ -292,7 +292,7 @@ export const categoriesFr: Record<string, CategoryTranslation> = {
         <span>
           Les "méta-frameworks" modernes et outils de construction (ex. Vite,
           Next.js, Astro...) sont, en substance, des serveurs de développement
-          orchestrant des empaqueteurs.
+          orchestrant des bundlers.
         </span>
       </>
     ),
@@ -320,7 +320,8 @@ export const categoriesFr: Record<string, CategoryTranslation> = {
           Outil permettant la gestion (installation, désinstallation, mise à
           jour) des dépendances dans les projets JavaScript. Ils fournissent des
           fonctionnalités comme le versioning, la résolution de dépendances, et
-          le verrouillage de versions à travers les fichiers de verrous.
+          le verrouillage de versions à travers les fichiers de verrous
+          (lockfile).
         </span>
         <br />
         <br />

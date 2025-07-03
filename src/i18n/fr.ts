@@ -30,9 +30,9 @@ export const fr: Translation = {
       title: "Qu'est-ce que c'est ?",
       description: [
         "Ceci est une représentation visuelle de certains des outils et technologies les plus courants utilisés dans le développement frontend.",
-        "L'outillage frontend est un monde vaste : il existe de nombreux outils avec des approches différentes.",
-        "Cette représentation visuelle vise à aider à comprendre quelles sont les différentes catégories d'outils qui existent, à quelles catégories appartiennent les outils bien connus et comment ils interagissent entre eux.",
-        "Les outils sont catégorisés par leur fonction et sont connectés les uns aux autres pour montrer comment ils interagissent.",
+        "L'outillage frontend est un écosystème vaste : il existe de nombreux outils ayant chacun des approches différentes.",
+        "Cette représentation visuelle vise à aider à comprendre quelles sont les différentes catégories d'outils qui existent, à quelles catégories appartiennent les outils bien connus et comment ces derniers interagissent entre eux.",
+        "Les outils sont groupés par leur catégorie et sont reliés les uns aux autres pour montrer comment ils interagissent.",
         "Avertissement : Il s'agit d'une représentation simplifiée, et certains outils et/ou liens peuvent être volontairement manquants pour garder la représentation visuelle claire.",
       ],
     },
