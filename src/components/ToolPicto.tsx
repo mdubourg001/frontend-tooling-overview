@@ -1,11 +1,14 @@
 import clsx from "clsx";
+import { useI18n } from "../i18n";
 
 type Props = {
   picto?: string;
   size?: "small" | "regular";
+  name?: string;
 };
 
-export function ToolPicto({ picto, size = "regular" }: Props) {
+export function ToolPicto({ picto, size = "regular", name }: Props) {
+  const { t } = useI18n();
   if (!picto) {
     return null;
   }
@@ -19,7 +22,7 @@ export function ToolPicto({ picto, size = "regular" }: Props) {
           "w-8 h-8": size === "regular",
         })}
         src={picto}
-        alt={`Logo of ${name}`}
+        alt={name ? `${t.ui.logoAlt} ${name}` : ""}
       />
     );
   } else {

@@ -4,6 +4,7 @@ import clsx from "clsx";
 
 import type { Tool as ToolType } from "../types";
 import { ToolPicto } from "./ToolPicto";
+import { useI18n } from "../i18n";
 
 type Props = Pick<Node, "className"> & {
   data: Pick<ToolType, "name" | "picto">;
@@ -19,11 +20,12 @@ function Tool({
   withHandles = true,
   handleClick,
 }: Props) {
+  const { t } = useI18n();
   const Element = handleClick ? "button" : "div";
 
   return (
     <Element
-      aria-label={handleClick ? `Open details about ${data.name}` : undefined}
+      aria-label={handleClick ? `${t.ui.openDetails} ${data.name}` : undefined}
       className={clsx(
         "inline-block shadow-md rounded-md bg-slate-800 text-white border-2 border-yellow-600",
         {
@@ -43,7 +45,7 @@ function Tool({
           "gap-4": size === "regular",
         })}
       >
-        <ToolPicto picto={data.picto as string} size={size} />
+        <ToolPicto picto={data.picto as string} size={size} name={data.name} />
 
         <span
           className={clsx("font-bold", {

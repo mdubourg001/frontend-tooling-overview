@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { useReactFlow } from "@xyflow/react";
 import cx from "clsx";
 
 import { CATEGORIES } from "../constants";
+import { useI18n } from "../i18n";
 
 type Props = {
   filters: {
@@ -39,13 +39,14 @@ export function CategoryFilters({
 }: Props) {
   const prezMode = false;
   const { fitView } = useReactFlow();
+  const { language, setLanguage, t } = useI18n();
 
   return (
     <div className="flex flex-col gap-y-2">
-      <h1 className="text-2xl font-extrabold">Frontend Tooling Overview</h1>
+      <h1 className="text-2xl font-extrabold">{t.ui.title}</h1>
       <div className="flex justify-center md:justify-normal items-center gap-x-2">
         <button className="underline cursor-pointer" onClick={handleWhatClick}>
-          What is it?
+          {t.ui.whatIsIt}
         </button>
         <span aria-hidden>•</span>
         <a
@@ -54,8 +55,16 @@ export function CategoryFilters({
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub
+          {t.ui.github}
         </a>
+        <span aria-hidden>•</span>
+        <button
+          className="underline cursor-pointer"
+          onClick={() => setLanguage(language === "en" ? "fr" : "en")}
+          aria-label={`Switch to ${language === "en" ? "French" : "English"}`}
+        >
+          {language === "en" ? "🇫🇷" : "🇬🇧"}
+        </button>
       </div>
 
       <div className="flex justify-center md:justify-normal items-center gap-x-2 mt-1 md:mb-4">
@@ -63,18 +72,19 @@ export function CategoryFilters({
           className="underline cursor-pointer"
           onClick={handleToggleSimulationRunning}
         >
-          {isSimulationRunning ? "Stop" : "Start"}&nbsp;simulation
+          {isSimulationRunning ? t.ui.stopSimulation : t.ui.startSimulation}
+          &nbsp;{t.ui.simulation}
         </button>
         <span aria-hidden>•</span>
         <button className="underline cursor-pointer" onClick={handleResetClick}>
-          Reset
+          {t.ui.reset}
         </button>
         <span aria-hidden>•</span>
         <button
           className="underline cursor-pointer"
           onClick={handleShuffleClick}
         >
-          Shuffle
+          {t.ui.shuffle}
         </button>
       </div>
 
@@ -99,7 +109,7 @@ export function CategoryFilters({
                     "bg-white border-slate-200": !filter.checked,
                   }
                 )}
-                aria-label={`Toggle ${filter.label}`}
+                aria-label={`${t.ui.toggleFilter} ${filter.label}`}
                 onMouseEnter={() => handleCategoryMouseEnter(filter.key)}
                 onMouseLeave={handleCategoryMouseLeave}
               >
@@ -129,7 +139,7 @@ export function CategoryFilters({
                   className="text-xs underline cursor-pointer opacity-30 hover:opacity-100 transition-opacity"
                   onClick={() => handleFocusCategoryClick(filter.key)}
                 >
-                  about
+                  {t.ui.about}
                 </button>
               )}
             </div>
@@ -142,13 +152,13 @@ export function CategoryFilters({
           className="cursor-pointer px-2 py-1 border rounded active:scale-95 transition-transform"
           onClick={handleCheckAll}
         >
-          Check all
+          {t.ui.checkAll}
         </button>
         <button
           className="cursor-pointer px-2 py-1 border rounded active:scale-95 transition-transform"
           onClick={handleUncheckAll}
         >
-          Uncheck all
+          {t.ui.uncheckAll}
         </button>
       </div>
     </div>

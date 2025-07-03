@@ -1,11 +1,11 @@
 import React from "react";
 
-import { CATEGORIES } from "../constants";
 import type { Tool } from "../types";
 import { ToolPicto } from "./ToolPicto";
+import { useI18n } from "../i18n";
 
 type Props = {
-  category: (typeof CATEGORIES)[number];
+  category: { key: string; name: string; description: React.ReactNode } | undefined;
   tools: Tool[];
   handleToolClick: (name: string) => void;
 };
@@ -15,6 +15,8 @@ function CategoryModalContent({
   tools = [],
   handleToolClick,
 }: Props) {
+  const { t } = useI18n();
+  
   if (!category) {
     return null;
   }
@@ -24,7 +26,7 @@ function CategoryModalContent({
       {"description" in category && (
         <>
           <h2 className="italic text-2xl border-b w-fit border-orange-300 mb-4">
-            Explanation
+            {t.ui.explanation}
           </h2>
           <p>{category?.description}</p>
         </>
@@ -33,7 +35,7 @@ function CategoryModalContent({
       {tools.length > 0 && (
         <>
           <h2 className="italic text-2xl border-b w-fit border-orange-300 mb-4">
-            Examples
+            {t.ui.examples}
           </h2>
 
           <div className="flex items-center flex-wrap gap-4">

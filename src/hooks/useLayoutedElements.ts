@@ -98,7 +98,6 @@ export function useLayoutedElements(initialRunning: boolean) {
     };
 
     const toggle = () => {
-      console.log("yo");
       if (!running) {
         getNodes().forEach((node, index) => {
           let simNode = nodes[index];

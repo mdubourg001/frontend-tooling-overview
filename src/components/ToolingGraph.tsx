@@ -20,7 +20,8 @@ import { ToolModalContent } from "./ToolModalContent";
 import { ToolPicto } from "./ToolPicto";
 import { useLayoutedElements } from "../hooks/useLayoutedElements";
 import { useModal } from "../hooks/useModal";
-import { CATEGORIES, TOOLS } from "../constants";
+import { getCategories, getLocalizedTool, TOOLS } from "../constants";
+import { I18nProvider, useI18n } from "../i18n";
 import type { Tool as ToolType } from "../types";
 
 import "@xyflow/react/dist/style.css";
@@ -74,10 +75,32 @@ const initialEdges: Edge[] = Object.values(TOOLS).flatMap((tool) => {
 
 // TODO: memoize components
 function LayoutFlow() {
+  const { language, t } = useI18n();
+  const categories = getCategories(language);
   const [initialRunning, setInitialRunning] = useState(true);
   const [filters, setFilters] = useState(
-    CATEGORIES.map((cat) => ({ key: cat.key, label: cat.name, checked: true }))
+    categories.map((cat) => ({ key: cat.key, label: cat.name, checked: true }))
   );
+
+  useEffect(
+    function updateFiltersOnLanguageChange() {
+      setFilters((prevFilters) =>
+        categories.map((category) => {
+          const existingFilter = prevFilters.find(
+            (f) => f.key === category.key
+          );
+
+          return {
+            key: category.key,
+            label: category.name,
+            checked: existingFilter?.checked ?? true,
+          };
+        })
+      );
+    },
+    [JSON.stringify(categories)]
+  );
+
   const [emphasizedCategory, setEmphasizedCategory] = useState<string | null>(
     null
   );
@@ -90,13 +113,13 @@ function LayoutFlow() {
     useLayoutedElements(initialRunning);
 
   const { toggle: toggleWhatModal, render: renderWhatModal } = useModal({
-    title: "Frontend Tooling Overview",
-    cancelLabel: "Close",
+    title: t.ui.title,
+    cancelLabel: t.ui.close,
     confirmLabel: "",
     children: () => <WhatModalContent />,
   });
 
-  const focusedCategoryObject = CATEGORIES.find(
+  const focusedCategoryObject = categories.find(
     (cat) => cat.key === focusedCategory
   );
   const focusedCategoryTools = Object.values(TOOLS).filter(
@@ -105,7 +128,7 @@ function LayoutFlow() {
   const { toggle: toggleFocusCategoryModal, render: renderFocusCategoryModal } =
     useModal({
       title: focusedCategoryObject?.name,
-      cancelLabel: "",
+      cancelLabel: t.ui.close,
       confirmLabel: "",
       initialIsOpen: !!focusedCategory,
       children: () => (
@@ -124,17 +147,23 @@ function LayoutFlow() {
     });
 
   const focusedToolObject = focusedTool
-    ? (TOOLS[focusedTool] as ToolType)
+    ? getLocalizedTool(
+        TOOLS[focusedTool as keyof typeof TOOLS] as ToolType,
+        language
+      )
     : null;
   const { toggle: toggleFocusToolModal, render: renderFocusToolModal } =
     useModal({
       title: (
         <div className="flex gap-x-2 items-center">
-          <ToolPicto picto={focusedToolObject?.picto} />
+          <ToolPicto
+            picto={focusedToolObject?.picto}
+            name={focusedToolObject?.name}
+          />
           <span>{focusedToolObject?.name}</span>
         </div>
       ),
-      cancelLabel: "",
+      cancelLabel: t.ui.close,
       confirmLabel: "",
       initialIsOpen: !!focusedToolObject,
       children: () => (
@@ -336,7 +365,9 @@ export function ToolingGraph() {
   return (
     <ReactFlowProvider>
       <NuqsAdapter>
-        <LayoutFlow />
+        <I18nProvider>
+          <LayoutFlow />
+        </I18nProvider>
       </NuqsAdapter>
     </ReactFlowProvider>
   );
